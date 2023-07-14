@@ -1,0 +1,6 @@
+{
+  "paymentCycle.paymentCycles.page.title": "Payment Cycles",
+  "paymentCycle.paymentCycleLauncher.title": "Generate Payment Cycle",
+  "paymentCycle.confirm.title": "Are sure you want to generate Payment Cycle?",
+  "paymentCycle.generatePaymentCycle.confirm.message": "Generate for {month} {year}."
+}
