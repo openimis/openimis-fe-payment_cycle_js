@@ -1,9 +1,13 @@
 import {
-    graphql, formatMutation,
+    graphql, formatMutation, formatPageQueryWithCount
 } from "@openimis/fe-core";
 import {ERROR, REQUEST, SUCCESS} from "./utils/action-type";
 import {ACTION_TYPE} from "./reducer";
-export function generatePaymentCycle(filters, clientMutationLabel, clientMutationDetails = null) {
+
+const PAYMENT_CYCLE_FULL_PROJECTION = () => [
+    'id'
+];
+export const generatePaymentCycle = (filters, clientMutationLabel, clientMutationDetails = null) => {
     const {month, year} = filters;
     let input = `
     month: ${month}
@@ -21,4 +25,9 @@ export function generatePaymentCycle(filters, clientMutationLabel, clientMutatio
             requestedDateTime
         }
     )
+}
+
+export function fetchPaymentCycles(modulesManager, params) {
+    const payload = formatPageQueryWithCount('paymentCycle', params, PAYMENT_CYCLE_FULL_PROJECTION());
+    return graphql(payload, ACTION_TYPE.SEARCH_PAYMENT_CYCLES);
 }

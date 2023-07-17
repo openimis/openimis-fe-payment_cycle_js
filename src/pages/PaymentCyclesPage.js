@@ -9,6 +9,7 @@ import {
     RIGHT_PAYMENT_CYCLE_SEARCH
 } from "../constants";
 import PaymentCycleLauncher from "../components/PaymentCycleLauncher";
+import PaymentCycleSearcher from "../components/PaymentCycleSearcher";
 
 const useStyles = makeStyles((theme) => ({
     page: theme.page,
@@ -26,6 +27,9 @@ function PaymentCyclesPage() {
             <Helmet title={formatMessage("paymentCycle.page.title")} />
             {// rights.includes(RIGHT_PAYMENT_CYCLE_CREATE) &&
                 <PaymentCycleLauncher className={classes.section} />
+            }
+            {// rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH) &&
+                <PaymentCycleSearcher className={classes.section} />
             }
         </Fragment>
     );

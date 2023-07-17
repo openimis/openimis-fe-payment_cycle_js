@@ -7,15 +7,18 @@ import {RIGHT_PAYMENT_CYCLE_SEARCH} from "./constants";
 import PaymentCyclesPage from "./pages/PaymentCyclesPage";
 
 const ROUTE_PAYMENT_CYCLES = "paymentCycles";
+const ROUTE_PAYMENT_CYCLE = "paymentCycles/paymentCycle";
 
 const DEFAULT_CONFIG = {
   "translations": [{ key: "en", messages: messages_en }],
   "reducers": [{ key: 'paymentCycle', reducer }],
   "refs": [
-    {key: "paymentCycle.route.paymentCycles", ref: ROUTE_PAYMENT_CYCLES}
+    {key: "paymentCycle.route.paymentCycles", ref: ROUTE_PAYMENT_CYCLES},
+    {key: "paymentCycle.route.paymentCycle", ref: ROUTE_PAYMENT_CYCLE}
   ],
   "core.Router": [
-    {path: ROUTE_PAYMENT_CYCLES, component: PaymentCyclesPage}
+    {path: ROUTE_PAYMENT_CYCLES, component: PaymentCyclesPage},
+    //{path: ROUTE_PAYMENT_CYCLE, component: PaymentCyclePage}
   ],
   "invoice.MainMenu": [
     {
