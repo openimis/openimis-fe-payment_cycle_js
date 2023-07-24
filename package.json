@@ -3,7 +3,7 @@
   "version": "1.2.0-rc1",
   "license": "AGPL-3.0-only",
   "description": "openIMIS Frontend Payment Cycle module",
-  "repository": "openimis/openimis-fe-template_js",
+  "repository": "openimis/openimis-fe-payment_cycle_js",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "engines": {
