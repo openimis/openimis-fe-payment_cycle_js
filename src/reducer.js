@@ -23,7 +23,7 @@ export const ACTION_TYPE = {
 
 export const MUTATION_SERVICE = {
   PAYMENT_CYCLE: {
-    CREATE: 'generatePaymentCycle',
+    CREATE: 'processBenefitPlanPaymentCycle',
   },
 };
 

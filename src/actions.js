@@ -6,6 +6,8 @@ import { ACTION_TYPE, MUTATION_SERVICE } from './reducer';
 
 const PAYMENT_CYCLE_FULL_PROJECTION = () => [
   'id',
+  'runYear',
+  'runMonth',
 ];
 export const generatePaymentCycle = (filters, clientMutationLabel, clientMutationDetails = null) => {
   const { month, year } = filters;
