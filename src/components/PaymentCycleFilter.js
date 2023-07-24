@@ -1,48 +1,18 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import {
-  // TextInput,
   PublishedComponent,
-  // formatMessage
 } from '@openimis/fe-core';
 import {
-  // FormControlLabel,
   Grid,
-  // Checkbox
 } from '@material-ui/core';
 import { withTheme, withStyles } from '@material-ui/core/styles';
-// import _debounce from 'lodash/debounce';
-// import { DEFAULT_DEBOUNCE_TIME, EMPTY_STRING } from '../constants';
 import { defaultFilterStyles } from '../utils/styles';
 
 function PaymentCycleFilter({
   classes, filters, onChangeFilters,
 }) {
-//   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFAULT_DEBOUNCE_TIME);
-
   const filterValue = (filterName) => filters?.[filterName]?.value;
-
-  //   const filterTextFieldValue = (filterName) => filters?.[filterName]?.value ?? EMPTY_STRING;
-
-  //   const onChangeStringFilter = (filterName, lookup = null) => (value) => {
-  //     if (lookup) {
-  //       debouncedOnChangeFilters([
-  //         {
-  //           id: filterName,
-  //           value,
-  //           filter: `${filterName}_${lookup}: "${value}"`,
-  //         },
-  //       ]);
-  //     } else {
-  //       onChangeFilters([
-  //         {
-  //           id: filterName,
-  //           value,
-  //           filter: `${filterName}: "${value}"`,
-  //         },
-  //       ]);
-  //     }
-  //   };
 
   return (
     <Grid container className={classes.form}>
@@ -51,12 +21,12 @@ function PaymentCycleFilter({
           pubRef="core.DatePicker"
           module="paymentCycle"
           label="label.dateValidFrom"
-          value={filterValue('dateValidFrom')}
+          value={filterValue('dateValidFrom_Gte')}
           onChange={(v) => onChangeFilters([
             {
-              id: 'dateValidFrom',
+              id: 'dateValidFrom_Gte',
               value: v,
-              filter: `dateValidFrom: "${v}T00:00:00.000Z"`,
+              filter: `dateValidFrom_Gte: "${v}T00:00:00.000Z"`,
             },
           ])}
         />
@@ -66,12 +36,12 @@ function PaymentCycleFilter({
           pubRef="core.DatePicker"
           module="paymentCycle"
           label="label.dateValidTo"
-          value={filterValue('dateValidTo')}
+          value={filterValue('dateValidTo_Lte')}
           onChange={(v) => onChangeFilters([
             {
-              id: 'dateValidTo',
+              id: 'dateValidTo_Lte',
               value: v,
-              filter: `dateValidTo: "${v}T00:00:00.000Z"`,
+              filter: `dateValidTo_Lte: "${v}T00:00:00.000Z"`,
             },
           ])}
         />

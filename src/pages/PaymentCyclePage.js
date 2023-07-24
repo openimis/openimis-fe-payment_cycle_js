@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   connect,
-  // useDispatch,
   useSelector,
 } from 'react-redux';
 import {
@@ -10,16 +9,13 @@ import {
 } from '@openimis/fe-core';
 import { EMPTY_STRING, MODULE_NAME } from '../constants';
 import PaymentCycleHeadPanel from '../components/PaymentCycleHeadPanel';
-// import {
-//   fetchPaymentCycle, clearPaymentCycle,
-// } from '../actions';
 import PaymentCycleTab from '../components/PaymentCycleTab';
 
 const useStyles = makeStyles((theme) => ({
   page: theme.page,
 }));
 
-function PaymentCyclePage({ paymentCycle, paymentCycleUuid }) {
+function PaymentCyclePage({ paymentCycle }) {
   const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
   const classes = useStyles();
   //   const dispatch = useDispatch();
@@ -31,14 +27,6 @@ function PaymentCyclePage({ paymentCycle, paymentCycleUuid }) {
   const titleParams = (paymentCycle) => ({
     code: paymentCycle?.code ?? EMPTY_STRING,
   });
-
-  useEffect(() => {
-    if (paymentCycleUuid) {
-      // dispatch(fetchPaymentCycle(modulesManager, { paymentCycleUuid }));
-    }
-  }, [paymentCycleUuid]);
-
-  // useEffect(() => () => dispatch(clearPaymentCycle()), []);
 
   return (
     <div className={classes.page}>

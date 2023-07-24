@@ -11,5 +11,8 @@
   "paymentCycle.PaymentCycleHeadPanel.label.id": "ID",
   "paymentCycle.label.dateValidFrom": "Date From",
   "paymentCycle.label.dateValidTo": "Date To",
-  "paymentCycle.saveButton.tooltip": "Save changes"
+  "paymentCycle.saveButton.tooltip": "Save changes",
+  "paymentCycle.paymentCycle.year": "Year",
+  "paymentCycle.paymentCycle.month": "Month",
+  "paymentCycle.viewDetailsButton.tooltip": "Details"
 }

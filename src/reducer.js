@@ -23,7 +23,7 @@ export const ACTION_TYPE = {
 
 export const MUTATION_SERVICE = {
   PAYMENT_CYCLE: {
-    CREATE: 'generatePaymentCycle',
+    PROCESS: 'processBenefitPlanPaymentCycle',
   },
 };
 
@@ -50,12 +50,20 @@ function reducer(
     case REQUEST(ACTION_TYPE.SEARCH_PAYMENT_CYCLES):
       return {
         ...state,
-        fetchingPaymentCycles: true,
+        submittingMutation: false,
+        mutation: {},
+        fetchingPaymentCycles: false,
+        fetchedPaymentCycles: false,
+        paymentCycles: [],
+        errorPaymentCycles: null,
+        paymentCyclesPageInfo: {},
+        paymentCyclesTotalCount: 0,
+        paymentCycle: null,
       };
     case SUCCESS(ACTION_TYPE.SEARCH_PAYMENT_CYCLES):
       return {
         ...state,
-        taskPaymentCycles: parseData(action.payload.data.task)?.map((paymentCycle) => ({
+        paymentCycles: parseData(action.payload.data.paymentCycle)?.map((paymentCycle) => ({
           ...paymentCycle,
           id: decodeId(paymentCycle.id),
         })),

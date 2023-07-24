@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Searcher, useHistory, useModulesManager, useTranslations,
+  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent
 } from '@openimis/fe-core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -17,11 +17,11 @@ import { fetchPaymentCycles } from '../actions';
 
 function PaymentCycleSearcher({
   rights,
-  //   fetchingPaymentCycles,
+  fetchingPaymentCycles,
   fetchedPaymentCycles,
   fetchPaymentCycles,
   errorPaymentCycles,
-  //   paymentCycles,
+  paymentCycles,
   paymentCyclesPageInfo,
   paymentCyclesTotalCount,
 }) {
@@ -30,11 +30,13 @@ function PaymentCycleSearcher({
   const { formatMessage, formatMessageWithValues } = useTranslations('paymentCycle', modulesManager);
 
   const headers = () => [
-    'taskGroup.id',
+    'paymentCycle.year',
+    'paymentCycle.month',
     'emptyLabel',
   ];
   const sorts = () => [
-    ['id', true],
+    ['run_year', true],
+    ['run_month', true],
   ];
 
   const fetch = (params) => fetchPaymentCycles(modulesManager, params);
@@ -45,7 +47,17 @@ function PaymentCycleSearcher({
   );
 
   const itemFormatters = () => [
-    (paymentCycle) => paymentCycle.id,
+    (paymentCycle) => paymentCycle.runYear,
+    (paymentCycle) => (
+      <PublishedComponent
+        pubRef="core.MonthPicker"
+        module="paymentCycle"
+        label="month"
+        readOnly
+        value={paymentCycle?.runMonth}
+        withNull={false}
+      />
+    ),
     (paymentCycle) => (
       <Tooltip title={formatMessage('viewDetailsButton.tooltip')}>
         <IconButton
@@ -62,19 +74,15 @@ function PaymentCycleSearcher({
     <PaymentCycleFilter filters={filters} onChangeFilters={onChangeFilters} formatMessage={formatMessage} />
   );
 
-  const DUMMY_PAYMENT_CYCLE = [{ uuid: 1, code: 'PC-1' }];
-
-  // TODO: Change fetchingItems and items.
-
   return (
     <Searcher
       module="paymentCycle"
       FilterPane={paymentCycleFilter}
       fetch={fetch}
-      items={DUMMY_PAYMENT_CYCLE}
+      items={paymentCycles}
       itemsPageInfo={paymentCyclesPageInfo}
       fetchedItems={fetchedPaymentCycles}
-      fetchingItems={false}
+      fetchingItems={fetchingPaymentCycles}
       errorItems={errorPaymentCycles}
       tableTitle={formatMessageWithValues('paymentCycle.searcherResultsTitle', { paymentCyclesTotalCount })}
       headers={headers}
@@ -82,7 +90,6 @@ function PaymentCycleSearcher({
       sorts={sorts}
       rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
       defaultPageSize={DEFAULT_PAGE_SIZE}
-      defaultOrderBy="code"
       rowIdentifier={rowIdentifier}
       onDoubleClick={onDoubleClick}
     />
