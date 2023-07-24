@@ -1,0 +1,18 @@
+{
+  "paymentCycle.paymentCycles.page.title": "Payment Cycles",
+  "paymentCycle.paymentCycleLauncher.title": "Generate Payment Cycle",
+  "paymentCycle.confirm.title": "Are sure you want to generate Payment Cycle?",
+  "paymentCycle.generatePaymentCycle.confirm.message": "Generate for {month} {year}.",
+  "paymentCycle.paymentCycle.page.title": "Generate Payment Cycle",
+  "paymentCycle.paymentCycle.searcherResultsTitle": "{paymentCyclesTotalCount} Payment Cycles",
+  "paymentCycle.PaymentCycleBillsTab.label": "Bills",
+  "paymentCycle.PaymentCyclePage.title": "Payment Cycle {code} ",
+  "paymentCycle.PaymentCycleHeadPanel.subtitle": "General Information",
+  "paymentCycle.PaymentCycleHeadPanel.label.id": "ID",
+  "paymentCycle.label.dateValidFrom": "Date From",
+  "paymentCycle.label.dateValidTo": "Date To",
+  "paymentCycle.saveButton.tooltip": "Save changes",
+  "paymentCycle.paymentCycle.year": "Year",
+  "paymentCycle.paymentCycle.month": "Month",
+  "paymentCycle.viewDetailsButton.tooltip": "Details"
+}
