@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent
+  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
 } from '@openimis/fe-core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
