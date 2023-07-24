@@ -16,7 +16,7 @@ export const generatePaymentCycle = (filters, clientMutationLabel, clientMutatio
     year: ${year}
   `;
   const mutation = formatMutation(
-    MUTATION_SERVICE.PAYMENT_CYCLE.CREATE,
+    MUTATION_SERVICE.PAYMENT_CYCLE.PROCESS,
     input,
     clientMutationLabel,
     clientMutationDetails,

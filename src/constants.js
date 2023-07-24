@@ -4,6 +4,9 @@ export const PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE = 'paymentCycle.ro
 
 export const DEFAULT_DEBOUNCE_TIME = 500;
 export const DEFAULT_PAGE_SIZE = 10;
+
+export const YEAR_CEILING = 9;
+export const YEAR_FLOOR = 7;
 export const ROWS_PER_PAGE_OPTIONS = [10, 20, 50, 100];
 export const EMPTY_STRING = '';
 

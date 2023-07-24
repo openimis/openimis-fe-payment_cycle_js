@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Searcher, useHistory, useModulesManager, useTranslations,
+  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent
 } from '@openimis/fe-core';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -35,8 +35,8 @@ function PaymentCycleSearcher({
     'emptyLabel',
   ];
   const sorts = () => [
-    ['year', true],
-    ['month', true],
+    ['run_year', true],
+    ['run_month', true],
   ];
 
   const fetch = (params) => fetchPaymentCycles(modulesManager, params);
@@ -48,7 +48,16 @@ function PaymentCycleSearcher({
 
   const itemFormatters = () => [
     (paymentCycle) => paymentCycle.runYear,
-    (paymentCycle) => paymentCycle.runMonth,
+    (paymentCycle) => (
+      <PublishedComponent
+        pubRef="core.MonthPicker"
+        module="paymentCycle"
+        label="month"
+        readOnly
+        value={paymentCycle?.runMonth}
+        withNull={false}
+      />
+    ),
     (paymentCycle) => (
       <Tooltip title={formatMessage('viewDetailsButton.tooltip')}>
         <IconButton

@@ -13,5 +13,6 @@
   "paymentCycle.label.dateValidTo": "Date To",
   "paymentCycle.saveButton.tooltip": "Save changes",
   "paymentCycle.paymentCycle.year": "Year",
-  "paymentCycle.paymentCycle.month": "Month"
+  "paymentCycle.paymentCycle.month": "Month",
+  "paymentCycle.viewDetailsButton.tooltip": "Details"
 }

@@ -16,6 +16,7 @@ import {
 } from '@openimis/fe-core';
 import SendIcon from '@material-ui/icons/Send';
 import { generatePaymentCycle } from '../actions';
+import { YEAR_CEILING, YEAR_FLOOR } from "../constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,8 +46,8 @@ function PaymentCycleLauncher({
   const { formatMessage, formatMessageWithValues } = useTranslations('paymentCycle', modulesManager);
   const prevSubmittingMutationRef = useRef();
   const [filters, setFilters] = useState({});
-  const min = new Date().getFullYear() - 7;
-  const max = min + 9;
+  const min = new Date().getFullYear() - YEAR_FLOOR;
+  const max = min + YEAR_CEILING;
 
   useEffect(() => {
     if (confirmed) {
@@ -54,7 +55,7 @@ function PaymentCycleLauncher({
         filters,
         formatMessageWithValues('paymentCycle.generate.mutationLabel', {
           year: filters.year,
-          month: filters.monthStr,
+          month: filters.monthString,
         }),
       );
     }
@@ -80,7 +81,7 @@ function PaymentCycleLauncher({
         'generatePaymentCycle.confirm.message',
         {
           year: filters.year,
-          month: filters.monthStr,
+          month: filters.monthString,
         },
       ),
     );
@@ -125,7 +126,7 @@ function PaymentCycleLauncher({
             value={filters?.month}
             withNull={false}
             required
-            onChange={(v, s) => setFilters({ ...filters, month: v, monthStr: s })}
+            onChange={(value, string) => setFilters({ ...filters, month: value, monthString: string })}
           />
         </Grid>
       </Grid>
