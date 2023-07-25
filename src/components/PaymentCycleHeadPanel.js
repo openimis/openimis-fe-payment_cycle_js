@@ -64,27 +64,21 @@ class PaymentCycleHeadPanel extends FormPanel {
           </Grid>
           <Grid item xs={3} className={classes.item}>
             <PublishedComponent
-              pubRef="core.DatePicker"
               module="paymentCycle"
-              label="label.dateValidFrom"
+              pubRef="core.YearPicker"
+              label="year"
               readOnly={readOnly}
-              value={paymentCycle?.dateValidFrom}
-              onChange={(dateValidFrom) => this.updateAttribute('dateValidFrom', dateValidFrom)}
-              // NOTE: maxDate cannot be passed if dateValidTo does not exist.
-              // Passing any other falsy value will block months manipulation.
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...(paymentCycle.dateValidTo ? { maxDate: paymentCycle.dateValidTo } : null)}
+              value={paymentCycle?.year}
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
             <PublishedComponent
-              pubRef="core.DatePicker"
               module="paymentCycle"
-              label="label.dateValidTo"
+              pubRef="core.MonthPicker"
+              label="month"
+              value={paymentCycle?.month}
+              withNull={false}
               readOnly={readOnly}
-              value={paymentCycle?.dateValidTo}
-              onChange={(dateValidTo) => this.updateAttribute('dateValidTo', dateValidTo)}
-              minDate={paymentCycle?.dateValidFrom ?? new Date()}
             />
           </Grid>
         </Grid>

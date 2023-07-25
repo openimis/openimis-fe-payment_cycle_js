@@ -1,24 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import {
-  connect,
-  useSelector,
-} from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import {
   Form, Helmet, useTranslations, useModulesManager, useHistory,
 } from '@openimis/fe-core';
 import { EMPTY_STRING, MODULE_NAME } from '../constants';
 import PaymentCycleHeadPanel from '../components/PaymentCycleHeadPanel';
 import PaymentCycleTab from '../components/PaymentCycleTab';
+import { clearPaymentCycle, fetchPaymentCycle } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   page: theme.page,
 }));
 
-function PaymentCyclePage({ paymentCycle }) {
+function PaymentCyclePage({ paymentCycle, paymentCycleUuid }) {
   const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
   const classes = useStyles();
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const modulesManager = useModulesManager();
   const history = useHistory();
   const { formatMessage, formatMessageWithValues } = useTranslations(MODULE_NAME, modulesManager);
@@ -27,6 +25,14 @@ function PaymentCyclePage({ paymentCycle }) {
   const titleParams = (paymentCycle) => ({
     code: paymentCycle?.code ?? EMPTY_STRING,
   });
+
+  useEffect(() => {
+    if (paymentCycleUuid) {
+      dispatch(fetchPaymentCycle(modulesManager, { paymentCycleUuid }));
+    }
+  }, [paymentCycleUuid]);
+
+  useEffect(() => () => dispatch(clearPaymentCycle()), []);
 
   return (
     <div className={classes.page}>
@@ -40,6 +46,7 @@ function PaymentCyclePage({ paymentCycle }) {
         back={back}
         HeadPanel={PaymentCycleHeadPanel}
         Panels={[PaymentCycleTab]}
+        paymentCycleUuid={paymentCycleUuid}
         formatMessage={formatMessage}
         rights={rights}
         saveTooltip={formatMessage('saveButton.tooltip')}

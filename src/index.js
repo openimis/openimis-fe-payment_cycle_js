@@ -10,7 +10,6 @@ import reducer from './reducer';
 import PaymentCyclesPage from './pages/PaymentCyclesPage';
 import PaymentCyclePage from './pages/PaymentCyclePage';
 import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './components/PaymentCycleBillsTab';
-import { INVOICE_BILL_SEARCHER_REF_KEY } from './constants';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
@@ -36,7 +35,6 @@ const DEFAULT_CONFIG = {
   ],
   'paymentCycle.TabPanel.label': [PaymentCycleBillsTabLabel],
   'paymentCycle.TabPanel.panel': [PaymentCycleBillsTabPanel],
-  'paymentCycle.bill.BillSearcher': [INVOICE_BILL_SEARCHER_REF_KEY],
 };
 
 export const PaymentCycleModule = (cfg) => ({ ...DEFAULT_CONFIG, ...cfg });

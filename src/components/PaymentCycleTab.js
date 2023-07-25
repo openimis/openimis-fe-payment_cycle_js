@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PaymentCycleTab({ rights, setConfirmedAction }) {
+function PaymentCycleTab({ rights, setConfirmedAction, paymentCycleUuid }) {
   const classes = useStyles();
 
   const [activeTab, setActiveTab] = useState(PAYMENT_CYCLE_BILLS_LIST_TAB_VALUE);
@@ -57,6 +57,7 @@ function PaymentCycleTab({ rights, setConfirmedAction }) {
         rights={rights}
         value={activeTab}
         setConfirmedAction={setConfirmedAction}
+        paymentCycleUuid={paymentCycleUuid}
       />
     </Paper>
   );

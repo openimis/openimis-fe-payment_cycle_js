@@ -43,7 +43,7 @@ function PaymentCycleSearcher({
 
   const rowIdentifier = (paymentCycle) => paymentCycle.id;
   const openPaymentCycle = (paymentCycle) => history.push(
-    `/${modulesManager.getRef(PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE)}/${paymentCycle?.uuid}`,
+    `/${modulesManager.getRef(PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE)}/${paymentCycle?.id}`,
   );
 
   const itemFormatters = () => [
