@@ -17,6 +17,7 @@ import {
   DEFAULT_PAGE_SIZE,
   GET_SUBJECT_AND_THIRDPARTY_TYPE_PICKER_REF,
   INVOICE_BILL_ROUTE,
+  RIGHT_BILL_SEARCH,
   RIGHT_BILL_UPDATE,
   ROWS_PER_PAGE_OPTIONS,
 } from '../constants';
@@ -37,7 +38,7 @@ function PaymentCycleBillSearcher({
   const modulesManager = useModulesManager();
   const { formatMessage, formatMessageWithValues } = useTranslations('paymentCycle', modulesManager);
 
-  const openBill = (bill) => rights.includes(RIGHT_BILL_UPDATE) && history.push(
+  const openBill = (bill) => rights.includes(RIGHT_BILL_SEARCH) && history.push(
     `/${modulesManager.getRef(INVOICE_BILL_ROUTE)}/${bill?.uuid}`,
   );
 
