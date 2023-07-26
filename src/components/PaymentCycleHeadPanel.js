@@ -67,8 +67,9 @@ class PaymentCycleHeadPanel extends FormPanel {
               module="paymentCycle"
               pubRef="core.YearPicker"
               label="year"
+              value={paymentCycle?.runYear}
+              withNull={false}
               readOnly={readOnly}
-              value={paymentCycle?.year}
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
@@ -76,7 +77,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               module="paymentCycle"
               pubRef="core.MonthPicker"
               label="month"
-              value={paymentCycle?.month}
+              value={paymentCycle?.runMonth}
               withNull={false}
               readOnly={readOnly}
             />

@@ -80,7 +80,7 @@ export function fetchPaymentCycles(modulesManager, params) {
 export function fetchPaymentCycle(modulesManager, variables) {
   return graphqlWithVariables(
     `
-    query getPaymentCycle ($paymentCycleUuid: String ) {
+    query getPaymentCycle ($paymentCycleUuid: ID ) {
       paymentCycle(id: $paymentCycleUuid) {
         edges {
           node {

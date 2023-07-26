@@ -34,6 +34,8 @@ function PaymentCyclePage({ paymentCycle, paymentCycleUuid }) {
 
   useEffect(() => () => dispatch(clearPaymentCycle()), []);
 
+  console.log(paymentCycle);
+
   return (
     <div className={classes.page}>
       <Helmet title={formatMessageWithValues('paymentCycle.PaymentCyclePage.title', titleParams(paymentCycle))} />
