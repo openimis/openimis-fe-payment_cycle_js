@@ -7,7 +7,7 @@ import {
 import { EMPTY_STRING, MODULE_NAME } from '../constants';
 import PaymentCycleHeadPanel from '../components/PaymentCycleHeadPanel';
 import PaymentCycleTab from '../components/PaymentCycleTab';
-import { clearPaymentCycle, fetchPaymentCycle } from '../actions';
+import { clearPaymentCycle, clearPaymentCycleBills, fetchPaymentCycle } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   page: theme.page,
@@ -26,13 +26,17 @@ function PaymentCyclePage({ paymentCycle, paymentCycleUuid }) {
     code: paymentCycle?.code ?? EMPTY_STRING,
   });
 
+  const clearDataOnPageUnmount = () => {
+    dispatch(clearPaymentCycle());
+    dispatch(clearPaymentCycleBills());
+  };
+
   useEffect(() => {
     if (paymentCycleUuid) {
       dispatch(fetchPaymentCycle(modulesManager, { paymentCycleUuid }));
     }
+    return clearDataOnPageUnmount;
   }, [paymentCycleUuid]);
-
-  useEffect(() => () => dispatch(clearPaymentCycle()), []);
 
   return (
     <div className={classes.page}>

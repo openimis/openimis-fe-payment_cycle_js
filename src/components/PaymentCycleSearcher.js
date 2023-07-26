@@ -1,19 +1,21 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect, useSelector } from 'react-redux';
+
+import { IconButton, Tooltip } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+
 import {
   Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
 } from '@openimis/fe-core';
-import { bindActionCreators } from 'redux';
-import { connect, useSelector } from 'react-redux';
-import { IconButton, Tooltip } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import PaymentCycleFilter from './PaymentCycleFilter';
+import { fetchPaymentCycles } from '../actions';
 import {
   DEFAULT_PAGE_SIZE,
   PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE,
   RIGHT_PAYMENT_CYCLE_SEARCH,
   ROWS_PER_PAGE_OPTIONS,
 } from '../constants';
-import { fetchPaymentCycles } from '../actions';
+import PaymentCycleFilter from './PaymentCycleFilter';
 
 function PaymentCycleSearcher({
   fetchingPaymentCycles,

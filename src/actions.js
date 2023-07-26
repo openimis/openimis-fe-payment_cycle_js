@@ -97,7 +97,7 @@ export function fetchPaymentCycle(modulesManager, variables) {
   );
 }
 
-export const clearPaymentCycle = (dispatch) => {
+export const clearPaymentCycle = () => (dispatch) => {
   dispatch({
     type: CLEAR(ACTION_TYPE.GET_PAYMENT_CYCLE),
   });
@@ -107,3 +107,9 @@ export function fetchPaymentCycleBills(params) {
   const payload = formatPageQueryWithCount('bill', params, BILL_FULL_PROJECTION);
   return graphql(payload, ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS);
 }
+
+export const clearPaymentCycleBills = () => (dispatch) => {
+  dispatch({
+    type: CLEAR(ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS),
+  });
+};

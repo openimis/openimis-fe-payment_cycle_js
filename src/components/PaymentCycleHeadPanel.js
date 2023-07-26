@@ -1,16 +1,15 @@
 import React from 'react';
+import { injectIntl } from 'react-intl';
+
 import { Grid, Divider, Typography } from '@material-ui/core';
+import { withTheme, withStyles } from '@material-ui/core/styles';
+
 import {
   withModulesManager,
   FormPanel,
   TextInput,
-  PublishedComponent,
-  //   TextAreaInput,
   FormattedMessage,
-  //   formatMessage,
 } from '@openimis/fe-core';
-import { injectIntl } from 'react-intl';
-import { withTheme, withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
   tableTitle: theme.table.title,
@@ -63,23 +62,19 @@ class PaymentCycleHeadPanel extends FormPanel {
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
-            <PublishedComponent
+            <TextInput
               module="paymentCycle"
-              pubRef="core.YearPicker"
               label="year"
-              value={paymentCycle?.runYear}
-              withNull={false}
               readOnly={readOnly}
+              value={paymentCycle?.runYear}
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
-            <PublishedComponent
+            <TextInput
               module="paymentCycle"
-              pubRef="core.MonthPicker"
               label="month"
-              value={paymentCycle?.runMonth}
-              withNull={false}
               readOnly={readOnly}
+              value={paymentCycle?.runMonth}
             />
           </Grid>
         </Grid>
