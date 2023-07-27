@@ -1,5 +1,7 @@
 {
   "paymentCycle.paymentCycles.page.title": "Payment Cycles",
+  "paymentCycle.tooltip.any": "Any",
+  "paymentCycle.tooltip.edit": "Edit",
   "paymentCycle.paymentCycleLauncher.title": "Generate Payment Cycle",
   "paymentCycle.confirm.title": "Are sure you want to generate Payment Cycle?",
   "paymentCycle.generatePaymentCycle.confirm.message": "Generate for {month} {year}.",
@@ -14,5 +16,19 @@
   "paymentCycle.saveButton.tooltip": "Save changes",
   "paymentCycle.paymentCycle.year": "Year",
   "paymentCycle.paymentCycle.month": "Month",
-  "paymentCycle.viewDetailsButton.tooltip": "Details"
+  "paymentCycle.viewDetailsButton.tooltip": "Details",
+  "paymentCycle.bills.pageTitle": "Bills",
+  "paymentCycle.bills.searcherResultsTitle": "{billsTotalCount} Bills Found",
+  "paymentCycle.bills.subject": "Subject",
+  "paymentCycle.bills.thirdparty": "Sender",
+  "paymentCycle.bills.code": "Code",
+  "paymentCycle.bills.dateBill": "Date Bill",
+  "paymentCycle.bills.amountTotal": "Amount Total",
+  "paymentCycle.bills.status.label": "Status",
+  "paymentCycle.bills.status.DRAFT": "Draft",
+  "paymentCycle.bills.status.VALIDATED": "Validated",
+  "paymentCycle.bills.status.PAYED": "Payed",
+  "paymentCycle.bills.status.CANCELLED": "Cancelled",
+  "paymentCycle.bills.status.DELETED": "Deleted",
+  "paymentCycle.bills.status.SUSPENDED": "Suspended"
 }

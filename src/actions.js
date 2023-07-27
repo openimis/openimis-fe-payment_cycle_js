@@ -1,14 +1,52 @@
 import {
-  graphql, formatMutation, formatPageQueryWithCount,
+  graphql, formatMutation, formatPageQueryWithCount, graphqlWithVariables,
 } from '@openimis/fe-core';
-import { ERROR, REQUEST, SUCCESS } from './utils/action-type';
+import {
+  CLEAR, ERROR, REQUEST, SUCCESS,
+} from './utils/action-type';
 import { ACTION_TYPE, MUTATION_SERVICE } from './reducer';
+
+const BILL_FULL_PROJECTION = [
+  'id',
+  'isDeleted',
+  'jsonExt',
+  'dateCreated',
+  'dateUpdated',
+  'dateValidFrom',
+  'dateValidTo',
+  'replacementUuid',
+  'thirdpartyType',
+  'thirdpartyTypeName',
+  'thirdpartyId',
+  'thirdparty',
+  'codeTp',
+  'code',
+  'codeExt',
+  'dateDue',
+  'datePayed',
+  'amountDiscount',
+  'amountNet',
+  'amountTotal',
+  'taxAnalysis',
+  'status',
+  'currencyTpCode',
+  'currencyCode',
+  'note',
+  'terms',
+  'paymentReference',
+  'subjectType',
+  'subjectTypeName',
+  'subjectId',
+  'subject',
+  'dateBill',
+];
 
 const PAYMENT_CYCLE_FULL_PROJECTION = () => [
   'id',
   'runYear',
   'runMonth',
 ];
+
 export const generatePaymentCycle = (filters, clientMutationLabel, clientMutationDetails = null) => {
   const { month, year } = filters;
   const input = `
@@ -39,8 +77,39 @@ export function fetchPaymentCycles(modulesManager, params) {
   return graphql(payload, ACTION_TYPE.SEARCH_PAYMENT_CYCLES);
 }
 
-export function fetchPaymentCycle(modulesManager, params) {
-  console.log(modulesManager, params);
+export function fetchPaymentCycle(modulesManager, variables) {
+  return graphqlWithVariables(
+    `
+    query getPaymentCycle ($paymentCycleUuid: ID ) {
+      paymentCycle(id: $paymentCycleUuid) {
+        edges {
+          node {
+            id,
+            runYear,
+            runMonth,
+          }
+        }
+      }
+    }
+      `,
+    variables,
+    ACTION_TYPE.GET_PAYMENT_CYCLE,
+  );
 }
 
-export function clearPaymentCycle() {}
+export const clearPaymentCycle = () => (dispatch) => {
+  dispatch({
+    type: CLEAR(ACTION_TYPE.GET_PAYMENT_CYCLE),
+  });
+};
+
+export function fetchPaymentCycleBills(params) {
+  const payload = formatPageQueryWithCount('bill', params, BILL_FULL_PROJECTION);
+  return graphql(payload, ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS);
+}
+
+export const clearPaymentCycleBills = () => (dispatch) => {
+  dispatch({
+    type: CLEAR(ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS),
+  });
+};

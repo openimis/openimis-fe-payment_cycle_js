@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab } from '@material-ui/core';
 import { PublishedComponent, useTranslations } from '@openimis/fe-core';
-import { MODULE_NAME, PAYMENT_CYCLE_BILLS_LIST_TAB_VALUE } from '../constants';
-import getBillSearcher from '../contributions/getBillSearcher';
+import { MODULE_NAME, PAYMENT_CYCLE_BILLS_LIST_TAB_VALUE, RIGHT_BILL_SEARCH } from '../constants';
+import PaymentCycleBillSearcher from './PaymentCycleBillSearcher';
 
 function PaymentCycleBillsTabLabel({
   onChange, tabStyle, isSelected, modulesManager,
@@ -19,8 +19,7 @@ function PaymentCycleBillsTabLabel({
   );
 }
 
-function PaymentCycleBillsTabPanel({ value, rights }) {
-  const { BillSearcher } = getBillSearcher();
+function PaymentCycleBillsTabPanel({ value, rights, paymentCycleUuid }) {
   return (
     <PublishedComponent
       pubRef="policyHolder.TabPanel"
@@ -28,7 +27,11 @@ function PaymentCycleBillsTabPanel({ value, rights }) {
       index={PAYMENT_CYCLE_BILLS_LIST_TAB_VALUE}
       value={value}
     >
-      <BillSearcher rights={rights} />
+      {
+      rights.includes(RIGHT_BILL_SEARCH) && (
+      <PaymentCycleBillSearcher rights={rights} paymentCycleUuid={paymentCycleUuid} />
+      )
+      }
     </PublishedComponent>
   );
 }

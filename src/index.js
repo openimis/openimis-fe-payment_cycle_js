@@ -2,15 +2,16 @@
 /* eslint-disable camelcase */
 
 import React from 'react';
-import { FormattedMessage } from '@openimis/fe-core';
+
 import { LocalOffer } from '@material-ui/icons';
-import messages_en from './translations/en.json';
+
+import { FormattedMessage } from '@openimis/fe-core';
+import { RIGHT_PAYMENT_CYCLE_SEARCH } from './constants';
 import reducer from './reducer';
-// import { RIGHT_PAYMENT_CYCLE_SEARCH } from './constants';
+import messages_en from './translations/en.json';
+import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './components/PaymentCycleBillsTab';
 import PaymentCyclesPage from './pages/PaymentCyclesPage';
 import PaymentCyclePage from './pages/PaymentCyclePage';
-import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './components/PaymentCycleBillsTab';
-import { INVOICE_BILL_SEARCHER_REF_KEY } from './constants';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
@@ -31,12 +32,11 @@ const DEFAULT_CONFIG = {
       text: <FormattedMessage module="paymentCycle" id="paymentCycles.page.title" />,
       icon: <LocalOffer />,
       route: `/${ROUTE_PAYMENT_CYCLES}`,
-      // filter: rights => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH)
+      filter: (rights) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH),
     },
   ],
   'paymentCycle.TabPanel.label': [PaymentCycleBillsTabLabel],
   'paymentCycle.TabPanel.panel': [PaymentCycleBillsTabPanel],
-  'paymentCycle.bill.BillSearcher': [INVOICE_BILL_SEARCHER_REF_KEY],
 };
 
 export const PaymentCycleModule = (cfg) => ({ ...DEFAULT_CONFIG, ...cfg });

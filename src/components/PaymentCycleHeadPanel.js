@@ -1,16 +1,15 @@
 import React from 'react';
+import { injectIntl } from 'react-intl';
+
 import { Grid, Divider, Typography } from '@material-ui/core';
+import { withTheme, withStyles } from '@material-ui/core/styles';
+
 import {
   withModulesManager,
   FormPanel,
   TextInput,
-  PublishedComponent,
-  //   TextAreaInput,
   FormattedMessage,
-  //   formatMessage,
 } from '@openimis/fe-core';
-import { injectIntl } from 'react-intl';
-import { withTheme, withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
   tableTitle: theme.table.title,
@@ -63,28 +62,19 @@ class PaymentCycleHeadPanel extends FormPanel {
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
-            <PublishedComponent
-              pubRef="core.DatePicker"
+            <TextInput
               module="paymentCycle"
-              label="label.dateValidFrom"
+              label="year"
               readOnly={readOnly}
-              value={paymentCycle?.dateValidFrom}
-              onChange={(dateValidFrom) => this.updateAttribute('dateValidFrom', dateValidFrom)}
-              // NOTE: maxDate cannot be passed if dateValidTo does not exist.
-              // Passing any other falsy value will block months manipulation.
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...(paymentCycle.dateValidTo ? { maxDate: paymentCycle.dateValidTo } : null)}
+              value={paymentCycle?.runYear}
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
-            <PublishedComponent
-              pubRef="core.DatePicker"
+            <TextInput
               module="paymentCycle"
-              label="label.dateValidTo"
+              label="month"
               readOnly={readOnly}
-              value={paymentCycle?.dateValidTo}
-              onChange={(dateValidTo) => this.updateAttribute('dateValidTo', dateValidTo)}
-              minDate={paymentCycle?.dateValidFrom ?? new Date()}
+              value={paymentCycle?.runMonth}
             />
           </Grid>
         </Grid>

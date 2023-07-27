@@ -1,22 +1,23 @@
 import React from 'react';
-import {
-  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent
-} from '@openimis/fe-core';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+
 import { IconButton, Tooltip } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import PaymentCycleFilter from './PaymentCycleFilter';
+
+import {
+  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
+} from '@openimis/fe-core';
+import { fetchPaymentCycles } from '../actions';
 import {
   DEFAULT_PAGE_SIZE,
   PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE,
   RIGHT_PAYMENT_CYCLE_SEARCH,
   ROWS_PER_PAGE_OPTIONS,
 } from '../constants';
-import { fetchPaymentCycles } from '../actions';
+import PaymentCycleFilter from './PaymentCycleFilter';
 
 function PaymentCycleSearcher({
-  rights,
   fetchingPaymentCycles,
   fetchedPaymentCycles,
   fetchPaymentCycles,
@@ -28,6 +29,7 @@ function PaymentCycleSearcher({
   const history = useHistory();
   const modulesManager = useModulesManager();
   const { formatMessage, formatMessageWithValues } = useTranslations('paymentCycle', modulesManager);
+  const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
 
   const headers = () => [
     'paymentCycle.year',
@@ -42,8 +44,8 @@ function PaymentCycleSearcher({
   const fetch = (params) => fetchPaymentCycles(modulesManager, params);
 
   const rowIdentifier = (paymentCycle) => paymentCycle.id;
-  const openPaymentCycle = (paymentCycle) => history.push(
-    `/${modulesManager.getRef(PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE)}/${paymentCycle?.uuid}`,
+  const openPaymentCycle = (paymentCycle) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH) && history.push(
+    `/${modulesManager.getRef(PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE)}/${paymentCycle?.id}`,
   );
 
   const itemFormatters = () => [
@@ -69,7 +71,8 @@ function PaymentCycleSearcher({
     ),
   ];
 
-  const onDoubleClick = (paymentCycle) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH) && openPaymentCycle(paymentCycle);
+  const onDoubleClick = (paymentCycle) => openPaymentCycle(paymentCycle);
+
   const paymentCycleFilter = ({ filters, onChangeFilters }) => (
     <PaymentCycleFilter filters={filters} onChangeFilters={onChangeFilters} formatMessage={formatMessage} />
   );

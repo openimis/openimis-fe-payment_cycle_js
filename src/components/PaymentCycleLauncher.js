@@ -16,7 +16,7 @@ import {
 } from '@openimis/fe-core';
 import SendIcon from '@material-ui/icons/Send';
 import { generatePaymentCycle } from '../actions';
-import { YEAR_CEILING, YEAR_FLOOR } from "../constants";
+import { YEAR_CEILING, YEAR_FLOOR } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
