@@ -11,7 +11,7 @@ In development mode, you can use `npm link` and `npm start` to continuously scan
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/openimis/openimis-fe-social_protection_js.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/openimis/openimis-fe-social_protection_js/alerts/)
 
 ## Main Menu Contributions
-* **Legal and Finance** (invoice.mainMenu translation key)
+* **Payments** (invoice.mainMenu translation key)
 
 **Payment Cycles** (route: `/paymentCycles`) displayed if user has the right `200001`
 
