@@ -61,8 +61,6 @@ function reducer(
     case REQUEST(ACTION_TYPE.SEARCH_PAYMENT_CYCLES):
       return {
         ...state,
-        submittingMutation: false,
-        mutation: {},
         fetchingPaymentCycles: false,
         fetchedPaymentCycles: false,
         paymentCycles: [],

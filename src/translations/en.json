@@ -30,5 +30,19 @@
   "paymentCycle.bills.status.PAYED": "Payed",
   "paymentCycle.bills.status.CANCELLED": "Cancelled",
   "paymentCycle.bills.status.DELETED": "Deleted",
-  "paymentCycle.bills.status.SUSPENDED": "Suspended"
+  "paymentCycle.bills.status.SUSPENDED": "Suspended",
+  "PaymentCyclePicker.placeholder": "Payment Cycle",
+  "PaymentCycle": "Payment Cycle",
+  "month1": "JANUARY",
+  "month2": "FEBRUARY",
+  "month3": "MARCH",
+  "month4": "APRIL",
+  "month5": "MAY",
+  "month6": "JUNE",
+  "month7": "JULY",
+  "month8": "AUGUST",
+  "month9": "SEPTEMBER",
+  "month10": "OCTOBER",
+  "month11": "NOVEMBER",
+  "month12": "DECEMBER"
 }
