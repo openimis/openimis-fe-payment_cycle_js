@@ -64,7 +64,6 @@ function PaymentCycleLauncher({
   }, [confirmed]);
 
   useEffect(() => {
-    console.log(submittingMutation);
     if (prevSubmittingMutationRef.current && !submittingMutation) {
       journalize(mutation);
       if (mutation?.clientMutationId) {
