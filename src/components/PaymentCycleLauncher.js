@@ -67,7 +67,7 @@ function PaymentCycleLauncher({
     if (prevSubmittingMutationRef.current && !submittingMutation) {
       journalize(mutation);
       if (mutation?.clientMutationId) {
-        fetchPaymentCycles(modulesManager, [`clientMutationId: "${mutation.clientMutationId}"`]);
+        fetchPaymentCycles(modulesManager, []);
       }
     }
   }, [submittingMutation]);
