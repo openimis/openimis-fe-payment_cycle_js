@@ -15,7 +15,7 @@ import {
   journalize,
 } from '@openimis/fe-core';
 import SendIcon from '@material-ui/icons/Send';
-import { generatePaymentCycle } from '../actions';
+import { fetchPaymentCycles, generatePaymentCycle } from '../actions';
 import { YEAR_CEILING, YEAR_FLOOR } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +40,7 @@ function PaymentCycleLauncher({
   clearConfirm,
   mutation,
   submittingMutation,
+  fetchPaymentCycles,
 }) {
   const modulesManager = useModulesManager();
   const classes = useStyles();
@@ -65,6 +66,9 @@ function PaymentCycleLauncher({
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
       journalize(mutation);
+      if (mutation?.clientMutationId) {
+        fetchPaymentCycles(modulesManager, []);
+      }
     }
   }, [submittingMutation]);
 
@@ -143,6 +147,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     generatePaymentCycle,
+    fetchPaymentCycles,
     coreConfirm,
     clearConfirm,
     journalize,

@@ -34,3 +34,5 @@ export const STATUS = {
   DELETED: '4',
   SUSPENDED: '5',
 };
+
+export const PAYMENT_CYCLES_QUANTITY_LIMIT = 15;

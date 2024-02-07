@@ -12,6 +12,7 @@ import messages_en from './translations/en.json';
 import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './components/PaymentCycleBillsTab';
 import PaymentCyclesPage from './pages/PaymentCyclesPage';
 import PaymentCyclePage from './pages/PaymentCyclePage';
+import PaymentCyclePicker from './pickers/PaymentCyclePicker';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
@@ -22,6 +23,7 @@ const DEFAULT_CONFIG = {
   refs: [
     { key: 'paymentCycle.route.paymentCycles', ref: ROUTE_PAYMENT_CYCLES },
     { key: 'paymentCycle.route.paymentCycle', ref: ROUTE_PAYMENT_CYCLE },
+    { key: 'paymentCycle.PaymentCyclePicker', ref: PaymentCyclePicker },
   ],
   'core.Router': [
     { path: ROUTE_PAYMENT_CYCLES, component: PaymentCyclesPage },

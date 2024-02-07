@@ -61,8 +61,6 @@ function reducer(
     case REQUEST(ACTION_TYPE.SEARCH_PAYMENT_CYCLES):
       return {
         ...state,
-        submittingMutation: false,
-        mutation: {},
         fetchingPaymentCycles: false,
         fetchedPaymentCycles: false,
         paymentCycles: [],
@@ -162,7 +160,7 @@ function reducer(
     case REQUEST(ACTION_TYPE.MUTATION):
       return dispatchMutationReq(state, action);
     case SUCCESS(ACTION_TYPE.GENERATE_PAYMENT_CYCLE):
-      return dispatchMutationResp(state, MUTATION_SERVICE.PAYMENT_CYCLE.CREATE, action);
+      return dispatchMutationResp(state, MUTATION_SERVICE.PAYMENT_CYCLE.PROCESS, action);
     case ERROR(ACTION_TYPE.MUTATION):
       return dispatchMutationErr(state, action);
     default:
