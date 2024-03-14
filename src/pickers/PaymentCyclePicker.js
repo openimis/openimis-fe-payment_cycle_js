@@ -4,7 +4,7 @@ import { TextField, Tooltip } from '@material-ui/core';
 import {
   Autocomplete, useModulesManager, useTranslations, useGraphqlQuery,
 } from '@openimis/fe-core';
-import { PAYMENT_CYCLES_QUANTITY_LIMIT } from '../constants';
+import { PAYMENT_CYCLE_STATUS, PAYMENT_CYCLES_QUANTITY_LIMIT } from '../constants';
 
 function PaymentCyclePicker(props) {
   const {
@@ -30,14 +30,15 @@ function PaymentCyclePicker(props) {
   const { isLoading, data, error } = useGraphqlQuery(
     `
     query PaymentCyclePicker(
-    $search: String, $first: Int, $isDeleted: Boolean
+    $search: String, $first: Int, $isDeleted: Boolean, $status: PaymentCycleStatus
     ) {
-      paymentCycle(search: $search, first: $first, isDeleted: $isDeleted) {
+      paymentCycle(search: $search, first: $first, isDeleted: $isDeleted, status: $status) {
         edges {
           node {
             id
-            runYear
-            runMonth
+            code
+            startDate
+            endDate
           }
         }
       }
@@ -58,12 +59,14 @@ function PaymentCyclePicker(props) {
       options={paymentCycles ?? []}
       isLoading={isLoading}
       value={value}
-      getOptionLabel={(option) => `${option.runYear} ${formatMessage(`month${option.runMonth}`)}`}
-      onChange={(value) => onChange(value, value ? `${value.runYear} ${value.runMonth}` : null)}
+      getOptionLabel={(option) => `${option.code} ${option.startDate} ${option.endDate}`}
+      onChange={(value) => onChange(value, value ? `${value.code} ${value.startDate} ${value.endDate}` : null)}
       setCurrentString={setCurrentString}
       filterOptions={filter}
       filterSelectedOptions={filterSelectedOptions}
-      onInputChange={(search) => setFilters({ first: PAYMENT_CYCLES_QUANTITY_LIMIT, search, isDeleted: false })}
+      onInputChange={(search) => setFilters({
+        first: PAYMENT_CYCLES_QUANTITY_LIMIT, search, isDeleted: false, status: PAYMENT_CYCLE_STATUS.ACTIVE,
+      })}
       renderInput={(inputProps) => (
         <Tooltip
           title={

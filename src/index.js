@@ -13,6 +13,7 @@ import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './componen
 import PaymentCyclesPage from './pages/PaymentCyclesPage';
 import PaymentCyclePage from './pages/PaymentCyclePage';
 import PaymentCyclePicker from './pickers/PaymentCyclePicker';
+import {PaymentCycleTaskItemFormatters, PaymentCycleTaskTableHeaders} from "./components/tasks/PaymentCycleTasks";
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
@@ -39,6 +40,12 @@ const DEFAULT_CONFIG = {
   ],
   'paymentCycle.TabPanel.label': [PaymentCycleBillsTabLabel],
   'paymentCycle.TabPanel.panel': [PaymentCycleBillsTabPanel],
+  'tasksManagement.tasks': [{
+    text: <FormattedMessage module="paymentCycle" id="paymentCycle.tasks.update.title" />,
+    tableHeaders: PaymentCycleTaskTableHeaders,
+    itemFormatters: PaymentCycleTaskItemFormatters,
+    taskSource: ['PaymentCycleService'],
+  }],
 };
 
 export const PaymentCycleModule = (cfg) => ({ ...DEFAULT_CONFIG, ...cfg });
