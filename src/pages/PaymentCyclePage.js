@@ -7,7 +7,6 @@ import {
 import _ from 'lodash';
 import { EMPTY_STRING, MODULE_NAME } from '../constants';
 import PaymentCycleHeadPanel from '../components/PaymentCycleHeadPanel';
-import PaymentCycleTab from '../components/PaymentCycleTab';
 import {
   clearPaymentCycle,
   clearPaymentCycleBills,
@@ -57,9 +56,7 @@ function PaymentCyclePage({ paymentCycleUuid }) {
     dispatch(clearPaymentCycleBills());
   };
 
-  const getPanels = () => {
-    return [];
-  };
+  const getPanels = () => [];
 
   useEffect(() => {
     if (paymentCycleUuid) {
