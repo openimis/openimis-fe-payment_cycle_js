@@ -1,15 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
-import { Grid, Divider, Typography } from '@material-ui/core';
-import { withTheme, withStyles } from '@material-ui/core/styles';
+import { Divider, Grid, Typography } from '@material-ui/core';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 import {
-  withModulesManager,
-  FormPanel,
-  TextInput,
   FormattedMessage,
+  FormPanel,
+  PublishedComponent,
+  ValidatedTextInput,
+  withModulesManager,
 } from '@openimis/fe-core';
+import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
+import { codeSetValid, codeValidationCheck, codeValidationClear } from '../actions';
 
 const styles = (theme) => ({
   tableTitle: theme.table.title,
@@ -40,11 +44,20 @@ const renderHeadPanelTitle = (classes) => (
 );
 
 class PaymentCycleHeadPanel extends FormPanel {
+  shouldValidate = (inputValue) => {
+    const { code } = this.props;
+    return inputValue !== code;
+  };
+
   render() {
     const {
       edited,
       classes,
-      readOnly = true,
+      readOnly,
+      isCodeValid,
+      isCodeValidating,
+      codeValidationError,
+      codeValidationErrorMessage,
     } = this.props;
     const paymentCycle = { ...edited };
     return (
@@ -53,28 +66,54 @@ class PaymentCycleHeadPanel extends FormPanel {
         <Divider />
         <Grid container className={classes.item}>
           <Grid item xs={3} className={classes.item}>
-            <TextInput
+            <ValidatedTextInput
               module="paymentCycle"
-              label="PaymentCycleHeadPanel.label.id"
+              label="PaymentCycleHeadPanel.label.code"
+              required
               readOnly={readOnly}
-              value={paymentCycle?.id}
-              onChange={(source) => this.updateAttribute('paymentCycle', source)}
+              value={paymentCycle?.code}
+              onChange={(v) => this.updateAttribute('code', v)}
+              itemQueryIdentifier="code"
+              codeTakenLabel={codeValidationErrorMessage}
+              shouldValidate={this.shouldValidate}
+              isValid={isCodeValid}
+              isValidating={isCodeValidating}
+              validationError={codeValidationError}
+              action={codeValidationCheck}
+              clearAction={codeValidationClear}
+              setValidAction={codeSetValid}
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
-            <TextInput
-              module="paymentCycle"
-              label="year"
+            <PublishedComponent
+              pubRef="core.DatePicker"
+              value={paymentCycle?.startDate}
+              required
               readOnly={readOnly}
-              value={paymentCycle?.runYear}
+              module="paymentCycle"
+              label="PaymentCycleHeadPanel.label.startDate"
+              onChange={(v) => this.updateAttribute('startDate', v)}
             />
           </Grid>
           <Grid item xs={3} className={classes.item}>
-            <TextInput
-              module="paymentCycle"
-              label="month"
+            <PublishedComponent
+              pubRef="core.DatePicker"
+              value={paymentCycle?.endDate}
+              required
               readOnly={readOnly}
-              value={paymentCycle?.runMonth}
+              module="paymentCycle"
+              label="PaymentCycleHeadPanel.label.endDate"
+              onChange={(v) => this.updateAttribute('endDate', v)}
+            />
+          </Grid>
+          <Grid item xs={3} className={classes.item}>
+            <PaymentCycleStatusPicker
+              value={paymentCycle?.status}
+              required
+              withNull={false}
+              module="paymentCycle"
+              label="PaymentCycleHeadPanel.label.status"
+              onChange={(v) => this.updateAttribute('status', v)}
             />
           </Grid>
         </Grid>
@@ -83,4 +122,14 @@ class PaymentCycleHeadPanel extends FormPanel {
   }
 }
 
-export default withModulesManager(injectIntl(withTheme(withStyles(styles)(PaymentCycleHeadPanel))));
+const mapStateToProps = (state) => ({
+  isCodeValid: state.paymentCycle.validationFields?.paymentCycleCode?.isValid,
+  isCodeValidating: state.paymentCycle.validationFields?.paymentCycleCode?.isValidating,
+  codeValidationError: state.paymentCycle.validationFields?.paymentCycleCode?.validationError,
+  codeValidationErrorMessage: state.paymentCycle.validationFields?.paymentCycleCode?.validationErrorMessage,
+  code: state.paymentCycle?.paymentCycle?.code,
+});
+
+export default withModulesManager(
+  connect(mapStateToProps)(injectIntl(withTheme(withStyles(styles)(PaymentCycleHeadPanel)))),
+);

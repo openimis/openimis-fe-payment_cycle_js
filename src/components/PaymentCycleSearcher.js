@@ -16,6 +16,7 @@ import {
   ROWS_PER_PAGE_OPTIONS,
 } from '../constants';
 import PaymentCycleFilter from './PaymentCycleFilter';
+import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 
 function PaymentCycleSearcher({
   fetchingPaymentCycles,
@@ -32,13 +33,15 @@ function PaymentCycleSearcher({
   const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
 
   const headers = () => [
-    'paymentCycle.year',
-    'paymentCycle.month',
+    'paymentCycle.code',
+    'paymentCycle.startDate',
+    'paymentCycle.endDate',
+    'paymentCycle.status',
     'emptyLabel',
   ];
   const sorts = () => [
-    ['run_year', true],
-    ['run_month', true],
+    ['startDate', true],
+    ['endDate', true],
   ];
 
   const fetch = (params) => fetchPaymentCycles(modulesManager, params);
@@ -49,15 +52,26 @@ function PaymentCycleSearcher({
   );
 
   const itemFormatters = () => [
-    (paymentCycle) => paymentCycle.runYear,
+    (paymentCycle) => paymentCycle?.code,
     (paymentCycle) => (
       <PublishedComponent
-        pubRef="core.MonthPicker"
-        module="paymentCycle"
-        label="month"
+        pubRef="core.DatePicker"
+        value={paymentCycle?.startDate}
         readOnly
-        value={paymentCycle?.runMonth}
-        withNull={false}
+      />
+    ),
+    (paymentCycle) => (
+      <PublishedComponent
+        pubRef="core.DatePicker"
+        value={paymentCycle?.endDate}
+        readOnly
+      />
+    ),
+    (paymentCycle) => (
+      <PaymentCycleStatusPicker
+        value={paymentCycle?.status}
+        required
+        readOnly
       />
     ),
     (paymentCycle) => (

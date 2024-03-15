@@ -1,12 +1,10 @@
 export const RIGHT_PAYMENT_CYCLE_SEARCH = 200001;
-export const RIGHT_PAYMENT_CYCLE_PROCESS = 200005;
+export const RIGHT_PAYMENT_CYCLE_CREATE = 200002;
 export const PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE = 'paymentCycle.route.paymentCycle';
 
 export const DEFAULT_DEBOUNCE_TIME = 500;
 export const DEFAULT_PAGE_SIZE = 10;
 export const CONTAINS_LOOKUP = 'Icontains';
-export const YEAR_CEILING = 9;
-export const YEAR_FLOOR = 7;
 export const ROWS_PER_PAGE_OPTIONS = [10, 20, 50, 100];
 export const EMPTY_STRING = '';
 export const ENUM_PREFIX_LENGTH = 2;
@@ -36,3 +34,13 @@ export const STATUS = {
 };
 
 export const PAYMENT_CYCLES_QUANTITY_LIMIT = 15;
+
+export const PAYMENT_CYCLE_STATUS = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+};
+
+export const PAYMENT_CYCLE_STATUS_LIST = [
+  PAYMENT_CYCLE_STATUS.PENDING, PAYMENT_CYCLE_STATUS.ACTIVE, PAYMENT_CYCLE_STATUS.SUSPENDED,
+];

@@ -1,16 +1,16 @@
 import React from 'react';
-import {
-  Helmet,
-  useTranslations, useModulesManager,
-} from '@openimis/fe-core';
-import { makeStyles } from '@material-ui/styles';
 import { useSelector } from 'react-redux';
 import {
-  RIGHT_PAYMENT_CYCLE_PROCESS,
+  Helmet,
+  useTranslations, useModulesManager, useHistory, withTooltip,
+} from '@openimis/fe-core';
+import { makeStyles } from '@material-ui/styles';
+import { Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import {
   MODULE_NAME,
-  RIGHT_PAYMENT_CYCLE_SEARCH,
+  RIGHT_PAYMENT_CYCLE_SEARCH, PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE, RIGHT_PAYMENT_CYCLE_CREATE,
 } from '../constants';
-import PaymentCycleLauncher from '../components/PaymentCycleLauncher';
 import PaymentCycleSearcher from '../components/PaymentCycleSearcher';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,17 +21,28 @@ const useStyles = makeStyles((theme) => ({
 function PaymentCyclesPage() {
   const modulesManager = useModulesManager();
   const classes = useStyles();
+  const history = useHistory();
   const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
   const { formatMessage } = useTranslations(MODULE_NAME, modulesManager);
+
+  const onCreate = () => history.push(
+    `/${modulesManager.getRef(PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE)}`,
+  );
 
   return (
     <div className={classes.page}>
       <Helmet title={formatMessage('paymentCycle.page.title')} />
-      {rights.includes(RIGHT_PAYMENT_CYCLE_PROCESS)
-        && <PaymentCycleLauncher className={classes.section} />}
-
       {rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH)
-        && <PaymentCycleSearcher className={classes.section} />}
+            && <PaymentCycleSearcher />}
+      {rights.includes(RIGHT_PAYMENT_CYCLE_CREATE)
+            && withTooltip(
+              <div className={classes.fab}>
+                <Fab color="primary" onClick={onCreate}>
+                  <AddIcon />
+                </Fab>
+              </div>,
+              formatMessage('createButton.tooltip'),
+            )}
     </div>
   );
 }
