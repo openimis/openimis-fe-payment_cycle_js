@@ -13,7 +13,7 @@ import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './componen
 import PaymentCyclesPage from './pages/PaymentCyclesPage';
 import PaymentCyclePage from './pages/PaymentCyclePage';
 import PaymentCyclePicker from './pickers/PaymentCyclePicker';
-import {PaymentCycleTaskItemFormatters, PaymentCycleTaskTableHeaders} from "./components/tasks/PaymentCycleTasks";
+import { PaymentCycleTaskItemFormatters, PaymentCycleTaskTableHeaders } from './components/tasks/PaymentCycleTasks';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';

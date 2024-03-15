@@ -58,11 +58,7 @@ function PaymentCyclePage({ paymentCycleUuid }) {
   };
 
   const getPanels = () => {
-    const panels = [];
-    if (paymentCycleUuid) {
-      panels.push(PaymentCycleTab);
-    }
-    return panels;
+    return [];
   };
 
   useEffect(() => {
