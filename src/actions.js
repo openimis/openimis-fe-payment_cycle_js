@@ -6,41 +6,6 @@ import {
 } from './utils/action-type';
 import { ACTION_TYPE, MUTATION_SERVICE } from './reducer';
 
-const BILL_FULL_PROJECTION = [
-  'id',
-  'isDeleted',
-  'jsonExt',
-  'dateCreated',
-  'dateUpdated',
-  'dateValidFrom',
-  'dateValidTo',
-  'replacementUuid',
-  'thirdpartyType',
-  'thirdpartyTypeName',
-  'thirdpartyId',
-  'thirdparty',
-  'codeTp',
-  'code',
-  'codeExt',
-  'dateDue',
-  'datePayed',
-  'amountDiscount',
-  'amountNet',
-  'amountTotal',
-  'taxAnalysis',
-  'status',
-  'currencyTpCode',
-  'currencyCode',
-  'note',
-  'terms',
-  'paymentReference',
-  'subjectType',
-  'subjectTypeName',
-  'subjectId',
-  'subject',
-  'dateBill',
-];
-
 const PAYMENT_CYCLE_FULL_PROJECTION = () => [
   'id',
   'code',
@@ -129,7 +94,6 @@ export const clearPaymentCycle = () => (dispatch) => {
   });
 };
 
-<<<<<<< Updated upstream
 export function fetchPaymentCycleBills(params) {
   const payload = formatPageQueryWithCount('bill', params, BILL_FULL_PROJECTION);
   return graphql(payload, ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS);
@@ -141,8 +105,6 @@ export const clearPaymentCycleBills = () => (dispatch) => {
   });
 };
 
-=======
->>>>>>> Stashed changes
 export function codeValidationCheck(mm, variables) {
   return graphqlWithVariables(
     `
