@@ -10,8 +10,6 @@ const PaymentCycleTaskTableHeaders = () => [
 
 const PaymentCycleTaskItemFormatters = () => [
   (paymentCycle) => paymentCycle?.code,
-  (paymentCycle) => paymentCycle?.startDate,
-  (paymentCycle) => paymentCycle?.endDate,
   (paymentCycle) => paymentCycle?.start_date,
   (paymentCycle) => paymentCycle?.end_date,
   (paymentCycle) => paymentCycle?.status,
