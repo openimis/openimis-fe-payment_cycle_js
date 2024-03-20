@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import {
-  Form, Helmet, useTranslations, useModulesManager, useHistory, journalize,
+  Form, Helmet, useTranslations, useModulesManager, useHistory, journalize, coreAlert,
 } from '@openimis/fe-core';
 import _ from 'lodash';
-import { EMPTY_STRING, MODULE_NAME } from '../constants';
+import { EMPTY_STRING, MODULE_NAME, PAYMENT_CYCLE_STATUS } from '../constants';
 import PaymentCycleHeadPanel from '../components/PaymentCycleHeadPanel';
 import {
   clearPaymentCycle,
@@ -14,6 +14,7 @@ import {
   fetchPaymentCycle,
   updatePaymentCycle,
 } from '../actions';
+import PaymentCycleTab from '../components/PaymentCycleTab';
 
 const useStyles = makeStyles((theme) => ({
   page: theme.page,
@@ -26,6 +27,7 @@ function PaymentCyclePage({ paymentCycleUuid }) {
   const modulesManager = useModulesManager();
   const history = useHistory();
   const [editedPaymentCycle, setEditedPaymentCycle] = useState({});
+  const [refresh, setRefresh] = useState('');
   const { formatMessage, formatMessageWithValues } = useTranslations(MODULE_NAME, modulesManager);
   const paymentCycle = useSelector((state) => state.paymentCycle.paymentCycle);
   const isPaymentCycleCodeValid = useSelector(
@@ -39,6 +41,9 @@ function PaymentCyclePage({ paymentCycleUuid }) {
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
       dispatch(journalize(mutation));
+      if (mutation?.clientMutationId) {
+        dispatch(fetchPaymentCycle(modulesManager, [`clientMutationId: "${mutation.clientMutationId}"`]));
+      }
     }
   }, [submittingMutation]);
 
@@ -53,14 +58,17 @@ function PaymentCyclePage({ paymentCycleUuid }) {
 
   const clearDataOnPageUnmount = () => {
     dispatch(clearPaymentCycle());
-    dispatch(clearPaymentCycleBills());
   };
 
-  const getPanels = () => [];
+  const getPanels = () => {
+    const panels = [];
+    if (paymentCycleUuid) panels.push(PaymentCycleTab);
+    return panels;
+  };
 
   useEffect(() => {
     if (paymentCycleUuid) {
-      dispatch(fetchPaymentCycle(modulesManager, { paymentCycleUuid }));
+      dispatch(fetchPaymentCycle(modulesManager, [`id: "${paymentCycleUuid}"`]));
     }
     return clearDataOnPageUnmount;
   }, [paymentCycleUuid]);
@@ -68,6 +76,11 @@ function PaymentCyclePage({ paymentCycleUuid }) {
   useEffect(() => {
     if (paymentCycle) {
       setEditedPaymentCycle(paymentCycle);
+      setRefresh(mutation.clientMutationId);
+      if (!paymentCycleUuid && paymentCycle?.id) {
+        const paymentCycleRouteRef = modulesManager.getRef('paymentCycle.route.paymentCycle');
+        history.replace(`/${paymentCycleRouteRef}/${paymentCycle.id}`);
+      }
     }
   }, [paymentCycle]);
 
@@ -82,6 +95,12 @@ function PaymentCyclePage({ paymentCycleUuid }) {
         editedPaymentCycle,
         formatMessageWithValues('paymentCycle.create.mutationLabel', titleParams(paymentCycle)),
       ));
+      if (editedPaymentCycle?.status === PAYMENT_CYCLE_STATUS.ACTIVE) {
+        dispatch(coreAlert(
+          formatMessage('PaymentCyclePage.taskCreated.header'),
+          formatMessage('PaymentCyclePage.taskCreated.body'),
+        ));
+      }
     }
   };
 
@@ -104,6 +123,7 @@ function PaymentCyclePage({ paymentCycleUuid }) {
     <div className={classes.page}>
       <Helmet title={formatMessageWithValues('paymentCycle.PaymentCyclePage.title', titleParams(paymentCycle))} />
       <Form
+        key={refresh}
         module="paymentCycle"
         title={formatMessageWithValues('paymentCycle.PaymentCyclePage.title', titleParams(paymentCycle))}
         titleParams={titleParams(paymentCycle)}

@@ -43,5 +43,8 @@
   "paymentCycle.paymentCycleStatusPicker.null": "ANY",
   "paymentCycle.update.mutationLabel": "Payment Cycle {code} has been updated.",
   "paymentCycle.create.mutationLabel": "Payment Cycle {code} has been created.",
-  "paymentCycle.tasks.update.title": "Payment Cycle Tasks"
+  "paymentCycle.tasks.update.title": "Payment Cycle Tasks",
+  "PaymentCycleTaskTab.label": "Tasks",
+  "PaymentCyclePage.taskCreated.header": "A task has been created.",
+  "PaymentCyclePage.taskCreated.body": "Payment Cycle will be created after approval."
 }

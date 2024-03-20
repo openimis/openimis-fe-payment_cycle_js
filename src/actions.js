@@ -6,41 +6,6 @@ import {
 } from './utils/action-type';
 import { ACTION_TYPE, MUTATION_SERVICE } from './reducer';
 
-const BILL_FULL_PROJECTION = [
-  'id',
-  'isDeleted',
-  'jsonExt',
-  'dateCreated',
-  'dateUpdated',
-  'dateValidFrom',
-  'dateValidTo',
-  'replacementUuid',
-  'thirdpartyType',
-  'thirdpartyTypeName',
-  'thirdpartyId',
-  'thirdparty',
-  'codeTp',
-  'code',
-  'codeExt',
-  'dateDue',
-  'datePayed',
-  'amountDiscount',
-  'amountNet',
-  'amountTotal',
-  'taxAnalysis',
-  'status',
-  'currencyTpCode',
-  'currencyCode',
-  'note',
-  'terms',
-  'paymentReference',
-  'subjectType',
-  'subjectTypeName',
-  'subjectId',
-  'subject',
-  'dateBill',
-];
-
 const PAYMENT_CYCLE_FULL_PROJECTION = () => [
   'id',
   'code',
@@ -101,26 +66,9 @@ export function fetchPaymentCycles(modulesManager, params) {
   return graphql(payload, ACTION_TYPE.SEARCH_PAYMENT_CYCLES);
 }
 
-export function fetchPaymentCycle(modulesManager, variables) {
-  return graphqlWithVariables(
-    `
-    query getPaymentCycle ($paymentCycleUuid: ID ) {
-      paymentCycle(id: $paymentCycleUuid) {
-        edges {
-          node {
-            id,
-            code,
-            startDate,
-            endDate,
-            status,
-          }
-        }
-      }
-    }
-      `,
-    variables,
-    ACTION_TYPE.GET_PAYMENT_CYCLE,
-  );
+export function fetchPaymentCycle(modulesManager, params) {
+  const payload = formatPageQueryWithCount('paymentCycle', params, PAYMENT_CYCLE_FULL_PROJECTION(modulesManager));
+  return graphql(payload, ACTION_TYPE.GET_PAYMENT_CYCLE);
 }
 
 export const clearPaymentCycle = () => (dispatch) => {
@@ -128,11 +76,6 @@ export const clearPaymentCycle = () => (dispatch) => {
     type: CLEAR(ACTION_TYPE.GET_PAYMENT_CYCLE),
   });
 };
-
-export function fetchPaymentCycleBills(params) {
-  const payload = formatPageQueryWithCount('bill', params, BILL_FULL_PROJECTION);
-  return graphql(payload, ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS);
-}
 
 export const clearPaymentCycleBills = () => (dispatch) => {
   dispatch({

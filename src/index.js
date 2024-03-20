@@ -9,11 +9,11 @@ import { FormattedMessage } from '@openimis/fe-core';
 import { RIGHT_PAYMENT_CYCLE_SEARCH } from './constants';
 import reducer from './reducer';
 import messages_en from './translations/en.json';
-import { PaymentCycleBillsTabLabel, PaymentCycleBillsTabPanel } from './components/PaymentCycleBillsTab';
 import PaymentCyclesPage from './pages/PaymentCyclesPage';
 import PaymentCyclePage from './pages/PaymentCyclePage';
 import PaymentCyclePicker from './pickers/PaymentCyclePicker';
 import { PaymentCycleTaskItemFormatters, PaymentCycleTaskTableHeaders } from './components/tasks/PaymentCycleTasks';
+import { PaymentCycleTaskTabLabel, PaymentCycleTaskTabPanel } from './components/PaymentCycleTaskTabPanel';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
@@ -38,8 +38,8 @@ const DEFAULT_CONFIG = {
       filter: (rights) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH),
     },
   ],
-  'paymentCycle.TabPanel.label': [PaymentCycleBillsTabLabel],
-  'paymentCycle.TabPanel.panel': [PaymentCycleBillsTabPanel],
+  'paymentCycle.TabPanel.label': [PaymentCycleTaskTabLabel],
+  'paymentCycle.TabPanel.panel': [PaymentCycleTaskTabPanel],
   'tasksManagement.tasks': [{
     text: <FormattedMessage module="paymentCycle" id="paymentCycle.tasks.update.title" />,
     tableHeaders: PaymentCycleTaskTableHeaders,
