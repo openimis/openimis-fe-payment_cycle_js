@@ -9,7 +9,6 @@ import { EMPTY_STRING, MODULE_NAME } from '../constants';
 import PaymentCycleHeadPanel from '../components/PaymentCycleHeadPanel';
 import {
   clearPaymentCycle,
-  clearPaymentCycleBills,
   createPaymentCycle,
   fetchPaymentCycle,
   updatePaymentCycle,

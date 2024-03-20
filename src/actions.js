@@ -129,6 +129,7 @@ export const clearPaymentCycle = () => (dispatch) => {
   });
 };
 
+<<<<<<< Updated upstream
 export function fetchPaymentCycleBills(params) {
   const payload = formatPageQueryWithCount('bill', params, BILL_FULL_PROJECTION);
   return graphql(payload, ACTION_TYPE.GET_PAYMENT_CYCLE_BILLS);
@@ -140,6 +141,8 @@ export const clearPaymentCycleBills = () => (dispatch) => {
   });
 };
 
+=======
+>>>>>>> Stashed changes
 export function codeValidationCheck(mm, variables) {
   return graphqlWithVariables(
     `
