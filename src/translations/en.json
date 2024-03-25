@@ -45,6 +45,7 @@
   "paymentCycle.create.mutationLabel": "Payment Cycle {code} has been created.",
   "paymentCycle.tasks.update.title": "Payment Cycle Tasks",
   "PaymentCycleTaskTab.label": "Tasks",
+  "PaymentCycleBenefitsTab.label": "Benefits",
   "PaymentCyclePage.taskCreated.header": "A task has been created.",
   "PaymentCyclePage.taskCreated.body": "Payment Cycle will be created after approval."
 }
