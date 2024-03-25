@@ -46,3 +46,4 @@ export const PAYMENT_CYCLE_STATUS_LIST = [
 ];
 
 export const PAYMENT_CYCLE_TASK_TAB_VALUE = 'paymentCycleTaskTab';
+export const PAYMENT_CYCLE_BENEFITS_TAB_VALUE = 'paymentCycleBenefitsTab';

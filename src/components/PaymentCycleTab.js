@@ -3,8 +3,9 @@ import { Paper, Grid } from '@material-ui/core';
 import { Contributions } from '@openimis/fe-core';
 import { makeStyles } from '@material-ui/styles';
 import {
+  PAYMENT_CYCLE_BENEFITS_TAB_VALUE,
   PAYMENT_CYCLE_TABS_LABEL_CONTRIBUTION_KEY,
-  PAYMENT_CYCLE_TABS_PANEL_CONTRIBUTION_KEY, PAYMENT_CYCLE_TASK_TAB_VALUE,
+  PAYMENT_CYCLE_TABS_PANEL_CONTRIBUTION_KEY,
 } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 function PaymentCycleTab({ rights, setConfirmedAction, paymentCycleUuid }) {
   const classes = useStyles();
 
-  const [activeTab, setActiveTab] = useState(PAYMENT_CYCLE_TASK_TAB_VALUE);
+  const [activeTab, setActiveTab] = useState(PAYMENT_CYCLE_BENEFITS_TAB_VALUE);
 
   const isSelected = (tab) => tab === activeTab;
 
