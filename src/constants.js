@@ -47,3 +47,11 @@ export const PAYMENT_CYCLE_STATUS_LIST = [
 
 export const PAYMENT_CYCLE_TASK_TAB_VALUE = 'paymentCycleTaskTab';
 export const PAYMENT_CYCLE_BENEFITS_TAB_VALUE = 'paymentCycleBenefitsTab';
+
+export const BASIC_FIELDS = [
+  { id: 'first_name', name: 'first_name' },
+  { id: 'last_name', name: 'last_name' },
+  { id: 'dob', name: 'dob' },
+];
+
+export const PAYMENT_DEDUPLICATION_DIALOG_CONTRIBUTION_KEY = 'paymentCycle.deduplicationFieldSelectionDialog';
