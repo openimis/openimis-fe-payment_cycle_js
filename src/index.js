@@ -15,12 +15,16 @@ import PaymentCyclePicker from './pickers/PaymentCyclePicker';
 import { PaymentCycleTaskItemFormatters, PaymentCycleTaskTableHeaders } from './components/tasks/PaymentCycleTasks';
 import { PaymentCycleTaskTabLabel, PaymentCycleTaskTabPanel } from './components/PaymentCycleTaskTabPanel';
 import { PaymentCycleBenefitsTabLabel, PaymentCycleBenefitsTabPanel } from './components/PaymentCycleBenefitsTabPanel';
+import DeduplicationFieldSelectionDialog from './components/dialogs/DeduplicationFieldSelectionDialog';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
 
 const DEFAULT_CONFIG = {
   translations: [{ key: 'en', messages: messages_en }],
+  'paymentCycle.deduplicationFieldSelectionDialog': [
+    DeduplicationFieldSelectionDialog,
+  ],
   reducers: [{ key: 'paymentCycle', reducer }],
   refs: [
     { key: 'paymentCycle.route.paymentCycles', ref: ROUTE_PAYMENT_CYCLES },

@@ -47,5 +47,11 @@
   "PaymentCycleTaskTab.label": "Tasks",
   "PaymentCycleBenefitsTab.label": "Benefits",
   "PaymentCyclePage.taskCreated.header": "A task has been created.",
-  "PaymentCyclePage.taskCreated.body": "Payment Cycle will be created after approval."
+  "PaymentCyclePage.taskCreated.body": "Payment Cycle will be created after approval.",
+  "paymentCycle.deduplicate": "Deduplicate",
+  "paymentCycle.deduplicate.title": "Payments Deduplication",
+  "paymentCycle.deduplicate.button.cancel": "Cancel",
+  "paymentCycle.deduplicate.fields": "Duplicate Detection Field Selection",
+  "paymentCycle.deduplicate.fields.placeholder": "Duplicate Detection Field Selection",
+  "paymentCycle.button.showDuplicateSummary": "Show Duplicate Summary"
 }

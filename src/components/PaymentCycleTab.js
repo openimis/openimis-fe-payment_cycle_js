@@ -6,6 +6,7 @@ import {
   PAYMENT_CYCLE_BENEFITS_TAB_VALUE,
   PAYMENT_CYCLE_TABS_LABEL_CONTRIBUTION_KEY,
   PAYMENT_CYCLE_TABS_PANEL_CONTRIBUTION_KEY,
+  PAYMENT_DEDUPLICATION_DIALOG_CONTRIBUTION_KEY,
 } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,15 +44,24 @@ function PaymentCycleTab({ rights, setConfirmedAction, paymentCycleUuid }) {
   return (
     <Paper className={classes.paper}>
       <Grid container className={`${classes.tableTitle} ${classes.tabs}`}>
-        <Contributions
-          contributionKey={PAYMENT_CYCLE_TABS_LABEL_CONTRIBUTION_KEY}
-          rights={rights}
-          value={activeTab}
-          onChange={handleChange}
-          isSelected={isSelected}
-          tabStyle={tabStyle}
-          paymentCycleUuid={paymentCycleUuid}
-        />
+        <div style={{ width: '100%' }}>
+          <div style={{ float: 'left' }}>
+            <Contributions
+              contributionKey={PAYMENT_CYCLE_TABS_LABEL_CONTRIBUTION_KEY}
+              rights={rights}
+              value={activeTab}
+              onChange={handleChange}
+              isSelected={isSelected}
+              tabStyle={tabStyle}
+              paymentCycleUuid={paymentCycleUuid}
+            />
+          </div>
+          <div style={{ float: 'right', paddingRight: '16px' }}>
+            <Contributions
+              contributionKey={PAYMENT_DEDUPLICATION_DIALOG_CONTRIBUTION_KEY}
+            />
+          </div>
+        </div>
       </Grid>
       <Contributions
         contributionKey={PAYMENT_CYCLE_TABS_PANEL_CONTRIBUTION_KEY}
