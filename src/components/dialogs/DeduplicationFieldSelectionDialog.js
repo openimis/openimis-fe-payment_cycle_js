@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { injectIntl } from 'react-intl';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,6 +12,8 @@ import { withTheme, withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DeduplicationFieldPicker from '../../pickers/DeduplicationFieldPicker';
+import DeduplicationSummaryDialog from './DeduplicationSummaryDialog';
+import { fetchGlobalSchema } from '../../actions';
 
 const styles = (theme) => ({
   item: theme.paper.item,
@@ -20,11 +22,22 @@ const styles = (theme) => ({
 function DeduplicationFieldSelectionDialog({
   intl,
   classes,
+  paymentCycle,
+  fetchGlobalSchema,
+  globalSchema,
 }) {
+  if (!paymentCycle) return null;
+
   const [selectedValues, setSelectedValues] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [showSummaryDialog, setShowSummaryDialog] = useState(false);
+
+  useEffect(() => {
+    fetchGlobalSchema(); // Fetch the global schema on component mount
+  }, [fetchGlobalSchema]);
 
   const handleOpen = () => {
+    setSelectedValues([]);
     setIsOpen(true);
   };
 
@@ -34,6 +47,15 @@ function DeduplicationFieldSelectionDialog({
 
   const handlePickerChange = (selectedOptions) => {
     setSelectedValues(selectedOptions);
+  };
+
+  const handleOpenNextDialog = () => {
+    setShowSummaryDialog(true);
+    handleClose();
+  };
+
+  const handleSummaryDialogClose = () => {
+    setShowSummaryDialog(false);
   };
 
   return (
@@ -73,6 +95,7 @@ function DeduplicationFieldSelectionDialog({
             value={selectedValues}
             module="paymentCycle"
             onChange={handlePickerChange}
+            globalSchema={globalSchema}
           />
         </DialogContent>
         <DialogActions
@@ -86,10 +109,11 @@ function DeduplicationFieldSelectionDialog({
           <div>
             <div style={{ float: 'left' }}>
               <Button
-                onClick={() => []}
+                onClick={handleOpenNextDialog}
                 variant="outlined"
                 autoFocus
                 style={{ margin: '0 16px' }}
+                disabled={!selectedValues.length}
               >
                 {formatMessage(intl, 'paymentCycle', 'button.showDuplicateSummary')}
               </Button>
@@ -111,6 +135,18 @@ function DeduplicationFieldSelectionDialog({
           </div>
         </DialogActions>
       </Dialog>
+
+      {showSummaryDialog && (
+        <DeduplicationSummaryDialog
+          intl={intl}
+          paymentCycle={paymentCycle}
+          handleClose={handleSummaryDialogClose}
+          showSummaryDialog={showSummaryDialog}
+          setShowSummaryDialog={setShowSummaryDialog}
+          selectedValues={selectedValues}
+          setSelectedValues={setSelectedValues}
+        />
+      )}
     </>
   );
 }
@@ -118,9 +154,11 @@ function DeduplicationFieldSelectionDialog({
 const mapStateToProps = (state) => ({
   rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
   confirmed: state.core.confirmed,
+  globalSchema: state.paymentCycle.globalSchema,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchGlobalSchema,
 }, dispatch);
 
 export default injectIntl(

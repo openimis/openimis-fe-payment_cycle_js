@@ -59,6 +59,7 @@ function PaymentCycleTab({ rights, setConfirmedAction, paymentCycleUuid }) {
           <div style={{ float: 'right', paddingRight: '16px' }}>
             <Contributions
               contributionKey={PAYMENT_DEDUPLICATION_DIALOG_CONTRIBUTION_KEY}
+              paymentCycle={paymentCycleUuid}
             />
           </div>
         </div>
