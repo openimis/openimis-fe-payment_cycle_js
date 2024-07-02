@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslations, Autocomplete } from '@openimis/fe-core';
 import { BASIC_FIELDS } from '../constants';
 
