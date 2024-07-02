@@ -1,5 +1,5 @@
 import {
-  graphql, formatMutation, formatPageQueryWithCount, graphqlWithVariables, formatGQLString,
+  graphql, formatMutation, formatQuery, formatPageQueryWithCount, graphqlWithVariables, formatGQLString,
 } from '@openimis/fe-core';
 import {
   CLEAR, ERROR, REQUEST, SUCCESS, VALID,
@@ -13,6 +13,27 @@ const PAYMENT_CYCLE_FULL_PROJECTION = () => [
   'endDate',
   'status',
 ];
+
+const DEDUPLICATION_SUMMARY_FULL_PROJECTION = () => [
+  'rows {count, ids, columnValues}',
+];
+
+// eslint-disable-next-line import/prefer-default-export
+export function fetchDeduplicationSummary(params) {
+  const payload = formatQuery('benefitDeduplicationSummary', params, DEDUPLICATION_SUMMARY_FULL_PROJECTION());
+  return graphql(payload, ACTION_TYPE.GET_DEDUPLICATION_BENEFIT_SUMMARY);
+}
+
+export function fetchGlobalSchema() {
+  const query = `
+    query {
+      globalSchema {
+        schema
+      }
+    }
+  `;
+  return graphql(query, ACTION_TYPE.FETCH_GLOBAL_SCHEMA);
+}
 
 function formatPaymentCycleGQL(paymentCycle) {
   return `

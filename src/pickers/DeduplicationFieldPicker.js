@@ -14,15 +14,23 @@ function DeduplicationFieldPicker({
   label,
   filterOptions,
   filterSelectedOptions,
+  globalSchema,
 }) {
   const [searchString, setSearchString] = useState();
   const { formatMessage } = useTranslations('deduplication');
 
-  // TO-DO - add global schema
-  // const beneficiaryDataSchema = JSON.parse(benefitPlan?.beneficiaryDataSchema);
-  // const schemaFields = Object.keys(beneficiaryDataSchema?.properties ?? {});
-  // const schemaFieldsList = schemaFields.map((key) => ({ id: key, name: key }));
-  const possibleFields = [...BASIC_FIELDS];
+  let parsedSchema = globalSchema;
+  if (typeof globalSchema === 'string') {
+    try {
+      parsedSchema = JSON.parse(globalSchema);
+    } catch (error) {
+      parsedSchema = null;
+    }
+  }
+
+  // eslint-disable-next-line max-len
+  const schemaFields = parsedSchema?.properties ? Object.keys(parsedSchema.properties).map((key) => ({ id: key, name: key })) : [];
+  const possibleFields = [...BASIC_FIELDS, ...schemaFields];
 
   return (
     <Autocomplete

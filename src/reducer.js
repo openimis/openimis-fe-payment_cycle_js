@@ -24,6 +24,8 @@ export const ACTION_TYPE = {
   UPDATE_PAYMENT_CYCLE: 'PAYMENT_CYCLE_UPDATE_PAYMENT_CYCLE',
   GET_PAYMENT_CYCLE_BILLS: 'PAYMENT_CYCLE_PAYMENT_CYCLE_BILLS',
   PAYMENT_CYCLE_CODE_VALIDATION_FIELDS: 'PAYMENT_CYCLE_CODE_VALIDATION_FIELDS',
+  GET_DEDUPLICATION_BENEFIT_SUMMARY: 'PAYMENT_CYCLE_DEDUPLICATION_BENEFIT_SUMMARY',
+  FETCH_GLOBAL_SCHEMA: 'PAYMENT_CYCLE_GLOBAL_SCHEMA',
 };
 
 export const MUTATION_SERVICE = {
@@ -54,6 +56,14 @@ const STORE_STATE = {
   errorPaymentCycleBills: null,
   paymentCyclesBillsPageInfo: {},
   paymentCyclesBillsTotalCount: 0,
+  fetchingDeduplicationBenefitSummary: false,
+  errorDeduplicationBenefitSummary: null,
+  fetchedDeduplicationBenefitSummary: false,
+  deduplicationBenefitSummary: [],
+  fetchingGlobalSchema: false,
+  fetchedGlobalSchema: false,
+  globalSchema: null,
+  errorGlobalSchema: null,
 };
 
 function reducer(
@@ -223,6 +233,59 @@ function reducer(
             validationError: null,
           },
         },
+      };
+    case REQUEST(ACTION_TYPE.GET_DEDUPLICATION_BENEFIT_SUMMARY):
+      return {
+        ...state,
+        fetchingDeduplicationBenefitSummary: true,
+        fetchedDeduplicationBenefitSummary: false,
+        deduplicationBenefitSummary: null,
+      };
+    case SUCCESS(ACTION_TYPE.GET_DEDUPLICATION_BENEFIT_SUMMARY):
+      return {
+        ...state,
+        fetchingDeduplicationBenefitSummary: false,
+        fetchedDeduplicationBenefitSummary: true,
+        deduplicationBenefitSummary: action.payload.data.benefitDeduplicationSummary.rows?.map((row) => ({
+          ...row,
+        })),
+        errorDeduplicationBenefitSummary: null,
+      };
+    case ERROR(ACTION_TYPE.GET_DEDUPLICATION_BENEFIT_SUMMARY):
+      return {
+        ...state,
+        fetchingDeduplicationBenefitSummary: false,
+        errorDeduplicationBenefitSummary: formatServerError(action.payload),
+      };
+    case REQUEST(ACTION_TYPE.FETCH_GLOBAL_SCHEMA):
+      return {
+        ...state,
+        fetchingGlobalSchema: true,
+        fetchedGlobalSchema: false,
+        globalSchema: null,
+        errorGlobalSchema: null,
+      };
+    case SUCCESS(ACTION_TYPE.FETCH_GLOBAL_SCHEMA):
+      return {
+        ...state,
+        fetchingGlobalSchema: false,
+        fetchedGlobalSchema: true,
+        globalSchema: action.payload.data.globalSchema.schema,
+        errorGlobalSchema: null,
+      };
+    case ERROR(ACTION_TYPE.FETCH_GLOBAL_SCHEMA):
+      return {
+        ...state,
+        fetchingGlobalSchema: false,
+        errorGlobalSchema: formatServerError(action.payload),
+      };
+    case CLEAR(ACTION_TYPE.FETCH_GLOBAL_SCHEMA):
+      return {
+        ...state,
+        fetchingGlobalSchema: false,
+        fetchedGlobalSchema: false,
+        globalSchema: null,
+        errorGlobalSchema: null,
       };
     case REQUEST(ACTION_TYPE.MUTATION):
       return dispatchMutationReq(state, action);
