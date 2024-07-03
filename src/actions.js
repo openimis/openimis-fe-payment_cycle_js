@@ -131,3 +131,39 @@ export function codeValidationClear() {
     dispatch({ type: CLEAR(ACTION_TYPE.PAYMENT_CYCLE_CODE_VALIDATION_FIELDS) });
   };
 }
+
+function formatDeduplicationTasksMutation(summary) {
+  if (!summary || !Array.isArray(summary)) {
+    return '';
+  }
+
+  const formattedSummary = summary.map((item) => {
+    const keyValuePairs = Object.entries(item)
+      .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
+      .join(', ');
+
+    return `{ ${keyValuePairs} }`;
+  });
+
+  return `summary: [${formattedSummary.join(', ')}]`;
+}
+
+export function createDeduplicationTasks(summary, clientMutationLabel) {
+  const mutation = formatMutation(
+    'createDeduplicationPaymentTasks',
+    formatDeduplicationTasksMutation(summary),
+    clientMutationLabel,
+  );
+  const requestedDateTime = new Date();
+  return graphql(
+    mutation.payload,
+    // eslint-disable-next-line max-len
+    [REQUEST(ACTION_TYPE.MUTATION), SUCCESS(ACTION_TYPE.CREATE_PAYMENT_DEDUPLICATION_TASKS), ERROR(ACTION_TYPE.MUTATION)],
+    {
+      actionType: ACTION_TYPE.CREATE_PAYMENT_DEDUPLICATION_TASKS,
+      clientMutationId: mutation.clientMutationId,
+      clientMutationLabel,
+      requestedDateTime,
+    },
+  );
+}

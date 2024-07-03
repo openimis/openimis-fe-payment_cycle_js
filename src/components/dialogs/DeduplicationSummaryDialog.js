@@ -10,7 +10,7 @@ import { withTheme, withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DeduplicationSummaryTable from '../tables/DeduplicationSummaryTable';
-import { fetchDeduplicationSummary } from '../../actions';
+import { createDeduplicationTasks, fetchDeduplicationSummary } from '../../actions';
 
 const styles = (theme) => ({
   item: theme.paper.item,
@@ -110,6 +110,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+  createDeduplicationTasks,
 }, dispatch);
 
 export default injectIntl(

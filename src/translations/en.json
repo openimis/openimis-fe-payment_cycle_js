@@ -53,5 +53,6 @@
   "paymentCycle.deduplicate.button.cancel": "Cancel",
   "paymentCycle.deduplicate.fields": "Duplicate Detection Field Selection",
   "paymentCycle.deduplicate.fields.placeholder": "Duplicate Detection Field Selection",
-  "paymentCycle.button.showDuplicateSummary": "Show Duplicate Summary"
+  "paymentCycle.button.showDuplicateSummary": "Show Duplicate Summary",
+  "paymentCycle.tasks.deduplication.title": "Payment Deduplication Task"
 }
