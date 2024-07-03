@@ -63,9 +63,6 @@ function BenefitPaymentDuplicatesTable({
               <TableCell key="checkbox-header-merge" className={classes.checkboxCell}>
                 <FormattedMessage module="deduplication" id="BeneficiaryDuplicatesTable.merge.header" />
               </TableCell>
-              <TableCell key="checkbox-header" className={classes.checkboxCell}>
-                <FormattedMessage module="deduplication" id="BeneficiaryDuplicatesTable.checkbox.header" />
-              </TableCell>
               {headers.map((header, index) => (
                 <TableCell key={index}>{header}</TableCell>
               ))}
@@ -97,23 +94,6 @@ function BenefitPaymentDuplicatesTable({
                 ))}
               </TableRow>
             ))}
-            <TableRow
-              className={classes.tableRow}
-            >
-              <TableCell className={classes.checkboxCell} />
-              <TableCell className={classes.checkboxCell}>
-                <FormattedMessage module="deduplication" id="BeneficiaryDuplicatesTable.output" />
-              </TableCell>
-              {headers.map((header, headerIndex) => (
-                <TableCell
-                  key={headerIndex}
-                  className={`${classes.tableDisabledCell} 
-                  ${completedData ? classes.selectedCell : ''}`}
-                >
-                  {rows[0][header]}
-                </TableCell>
-              ))}
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>

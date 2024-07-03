@@ -56,7 +56,7 @@ const DEFAULT_CONFIG = {
     taskSource: ['PaymentCycleService'],
   },
   {
-    text: <FormattedMessage module="deduplication" id="tasks.deduplication.title" />,
+    text: <FormattedMessage module="paymentCycle" id="tasks.deduplication.title" />,
     tableHeaders: DeduplicationPaymentResolutionTaskTableHeaders,
     itemFormatters: DeduplicationPaymentResolutionItemFormatters,
     taskSource: ['CreateDeduplicationPaymentReviewTasksService'],
