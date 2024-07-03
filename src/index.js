@@ -16,6 +16,10 @@ import { PaymentCycleTaskItemFormatters, PaymentCycleTaskTableHeaders } from './
 import { PaymentCycleTaskTabLabel, PaymentCycleTaskTabPanel } from './components/PaymentCycleTaskTabPanel';
 import { PaymentCycleBenefitsTabLabel, PaymentCycleBenefitsTabPanel } from './components/PaymentCycleBenefitsTabPanel';
 import DeduplicationFieldSelectionDialog from './components/dialogs/DeduplicationFieldSelectionDialog';
+import {
+  DeduplicationPaymentResolutionItemFormatters,
+  DeduplicationPaymentResolutionTaskTableHeaders,
+} from './components/tasks/DeduplicationPaymentResolutionTask';
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
@@ -50,6 +54,12 @@ const DEFAULT_CONFIG = {
     tableHeaders: PaymentCycleTaskTableHeaders,
     itemFormatters: PaymentCycleTaskItemFormatters,
     taskSource: ['PaymentCycleService'],
+  },
+  {
+    text: <FormattedMessage module="deduplication" id="tasks.deduplication.title" />,
+    tableHeaders: DeduplicationPaymentResolutionTaskTableHeaders,
+    itemFormatters: DeduplicationPaymentResolutionItemFormatters,
+    taskSource: ['CreateDeduplicationPaymentReviewTasksService'],
   }],
 };
 
