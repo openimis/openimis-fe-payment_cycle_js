@@ -40,19 +40,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BenefitPaymentDuplicatesTable({
-  headers, rows, completedData,
+  headers, rows, completedData, setAdditionalData,
 }) {
   const classes = useStyles();
-  const [dontMergeRows, setDontMergeRows] = useState([]);
-  const shouldDisableCell = (rowIndex) => dontMergeRows.includes(rowIndex);
   const shouldCrossText = (rowIndex) => rows[rowIndex]?.is_deleted;
+  const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
     if (completedData) {
       const numberOfRows = Array.from(Array(rows.length).keys());
-      setDontMergeRows(numberOfRows);
+      setSelectedRows(numberOfRows.slice(1));
     }
-  }, [completedData]);
+  }, [completedData, rows.length]);
+
+  const handleCheckboxChange = (rowIndex) => {
+    const newSelectedRows = [...selectedRows];
+    const index = newSelectedRows.indexOf(rowIndex);
+    if (index !== -1) {
+      newSelectedRows.splice(index, 1);
+    } else {
+      newSelectedRows.push(rowIndex);
+    }
+    if (newSelectedRows.length < rows.length) {
+      setSelectedRows(newSelectedRows);
+      const benefitIds = newSelectedRows.map((idx) => rows[idx].benefitId);
+      const additionalDataString = `{\\"benefitIds\\": ${JSON.stringify(benefitIds).replace(/"/g, '\\"')}}`;
+      // eslint-disable-next-line object-shorthand
+      setAdditionalData(additionalDataString);
+    }
+  };
+
+  const shouldDisableCell = (rowIndex) => selectedRows.includes(rowIndex);
 
   return (
     <div className={classes.tableContainer}>
@@ -61,7 +79,7 @@ function BenefitPaymentDuplicatesTable({
           <TableHead className={classes.header}>
             <TableRow className={classes.header}>
               <TableCell key="checkbox-header-merge" className={classes.checkboxCell}>
-                <FormattedMessage module="deduplication" id="BeneficiaryDuplicatesTable.merge.header" />
+                <FormattedMessage module="paymentCycle" id="PaymentDuplicatesTable.merge.header" />
               </TableCell>
               {headers.map((header, index) => (
                 <TableCell key={index}>{header}</TableCell>
@@ -77,8 +95,9 @@ function BenefitPaymentDuplicatesTable({
                 <TableCell key={`checkbox-cell-${rowIndex}`} className={classes.checkboxCell}>
                   <Checkbox
                     color="primary"
-                    onChange={() => {}}
-                    disabled={shouldDisableCell(rowIndex)}
+                    checked={selectedRows.includes(rowIndex)}
+                    onChange={() => handleCheckboxChange(rowIndex)}
+                    disabled={selectedRows.length === rows.length - 1 && !selectedRows.includes(rowIndex)}
                   />
                 </TableCell>
                 {headers.map((header, headerIndex) => (
