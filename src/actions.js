@@ -132,7 +132,7 @@ export function codeValidationClear() {
   };
 }
 
-function formatDeduplicationTasksMutation(summary) {
+function formatDeduplicationTasksMutation(summary, paymentCycle) {
   if (!summary || !Array.isArray(summary)) {
     return '';
   }
@@ -145,13 +145,13 @@ function formatDeduplicationTasksMutation(summary) {
     return `{ ${keyValuePairs} }`;
   });
 
-  return `summary: [${formattedSummary.join(', ')}]`;
+  return `summary: [${formattedSummary.join(', ')}], paymentCycle: "${paymentCycle}"`;
 }
 
-export function createDeduplicationTasks(summary, clientMutationLabel) {
+export function createDeduplicationTasks(summary, paymentCycle, clientMutationLabel) {
   const mutation = formatMutation(
     'createDeduplicationPaymentTasks',
-    formatDeduplicationTasksMutation(summary),
+    formatDeduplicationTasksMutation(summary, paymentCycle),
     clientMutationLabel,
   );
   const requestedDateTime = new Date();

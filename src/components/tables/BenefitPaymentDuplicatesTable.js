@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import {
@@ -40,18 +41,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BenefitPaymentDuplicatesTable({
-  headers, rows, completedData, setAdditionalData,
+  headers, rows, completedData, setAdditionalData, businessData,
 }) {
   const classes = useStyles();
   const shouldCrossText = (rowIndex) => rows[rowIndex]?.is_deleted;
   const [selectedRows, setSelectedRows] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(!!completedData);
 
   useEffect(() => {
-    if (completedData) {
-      const numberOfRows = Array.from(Array(rows.length).keys());
-      setSelectedRows(numberOfRows.slice(1));
+    if (businessData && businessData.count !== businessData.ids.length) {
+      setSelectedRows([]);
+      setIsDeleted(true);
     }
-  }, [completedData, rows.length]);
+  }, [businessData]);
 
   const handleCheckboxChange = (rowIndex) => {
     const newSelectedRows = [...selectedRows];
@@ -97,14 +99,14 @@ function BenefitPaymentDuplicatesTable({
                     color="primary"
                     checked={selectedRows.includes(rowIndex)}
                     onChange={() => handleCheckboxChange(rowIndex)}
-                    disabled={selectedRows.length === rows.length - 1 && !selectedRows.includes(rowIndex)}
+                    disabled={isDeleted || (selectedRows.length === rows.length - 1 && !selectedRows.includes(rowIndex))}
                   />
                 </TableCell>
                 {headers.map((header, headerIndex) => (
                   <TableCell
                     key={headerIndex}
                     className={`} 
-                    ${shouldDisableCell(rowIndex) ? classes.tableDisabledCell : ''}
+                    ${shouldDisableCell(rowIndex) || isDeleted ? classes.tableDisabledCell : ''}
                     ${shouldCrossText(rowIndex) ? classes.strikethrough : ''}
                     `}
                   >

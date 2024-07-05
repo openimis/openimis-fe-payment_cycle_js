@@ -57,6 +57,7 @@ function DeduplicationPaymentResolutionTaskDisplay({
           rows={benefits}
           setAdditionalData={setAdditionalData}
           completedData={completedData}
+          businessData={businessData}
         />
 
       </div>
