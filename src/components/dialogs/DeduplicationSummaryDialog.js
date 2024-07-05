@@ -33,7 +33,8 @@ function DeduplicationSummaryDialog({
 
   const onDeduplicationTasksClick = () => {
     if (summary) {
-      createDeduplicationTasks(summary, formatMessage(intl, 'deduplication', 'deduplicate.mutation.createTasks'));
+      // eslint-disable-next-line max-len
+      createDeduplicationTasks(summary, paymentCycle, formatMessage(intl, 'deduplication', 'deduplicate.mutation.createTasks'));
     }
     setShowSummaryDialog(false);
   };
