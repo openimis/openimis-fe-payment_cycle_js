@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Paper, Grid } from '@material-ui/core';
 import { Contributions } from '@openimis/fe-core';
 import { makeStyles } from '@material-ui/styles';
+import Button from '@material-ui/core/Button';
 import {
   PAYMENT_CYCLE_BENEFITS_TAB_VALUE,
   PAYMENT_CYCLE_TABS_LABEL_CONTRIBUTION_KEY,
   PAYMENT_CYCLE_TABS_PANEL_CONTRIBUTION_KEY,
   PAYMENT_DEDUPLICATION_DIALOG_CONTRIBUTION_KEY,
 } from '../constants';
+import downloadDuplicatedPayments from '../utils/export';
 
 const useStyles = makeStyles((theme) => ({
   paper: theme.paper.paper,
@@ -41,6 +43,10 @@ function PaymentCycleTab({ rights, setConfirmedAction, paymentCycleUuid }) {
 
   const handleChange = (_, tab) => setActiveTab(tab);
 
+  const downloadDuplicates = (paymentCycleId) => {
+    downloadDuplicatedPayments(paymentCycleId);
+  };
+
   return (
     <Paper className={classes.paper}>
       <Grid container className={`${classes.tableTitle} ${classes.tabs}`}>
@@ -61,6 +67,18 @@ function PaymentCycleTab({ rights, setConfirmedAction, paymentCycleUuid }) {
               contributionKey={PAYMENT_DEDUPLICATION_DIALOG_CONTRIBUTION_KEY}
               paymentCycle={paymentCycleUuid}
             />
+            <Button
+              onClick={() => downloadDuplicates(paymentCycleUuid)}
+              variant="outlined"
+              color="#DFEDEF"
+              className={classes.button}
+              style={{
+                border: '0px',
+                marginTop: '6px',
+              }}
+            >
+              DOWNLOAD DUPLICATES
+            </Button>
           </div>
         </div>
       </Grid>
