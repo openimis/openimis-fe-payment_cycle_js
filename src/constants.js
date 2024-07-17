@@ -33,7 +33,7 @@ export const STATUS = {
   SUSPENDED: '5',
 };
 
-export const PAYMENT_CYCLES_QUANTITY_LIMIT = 15;
+export const PAYMENT_CYCLES_QUANTITY_LIMIT = 50;
 
 export const PAYMENT_CYCLE_STATUS = {
   PENDING: 'PENDING',
