@@ -45,7 +45,7 @@ const DEFAULT_CONFIG = {
       icon: <LocalOffer />,
       route: `/${ROUTE_PAYMENT_CYCLES}`,
       filter: (rights) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH),
-      id: 'invoice.paymentCycles',
+      id: 'legalAndFinance.paymentCycles',
     },
   ],
   'paymentCycle.TabPanel.label': [PaymentCycleBenefitsTabLabel, PaymentCycleTaskTabLabel],
