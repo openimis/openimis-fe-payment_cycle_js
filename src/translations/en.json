@@ -55,5 +55,9 @@
   "paymentCycle.deduplicate.fields.placeholder": "Duplicate Detection Field Selection",
   "paymentCycle.button.showDuplicateSummary": "Show Duplicate Summary",
   "paymentCycle.tasks.deduplication.title": "Payment Deduplication Task",
-  "paymentCycle.PaymentDuplicatesTable.merge.header": "Remove payment"
+  "paymentCycle.PaymentDuplicatesTable.merge.header": "Remove payment",
+  "payment_cycle.gql_query_payment_cycle_perms": "Payment Cycle | Query Payment Cycle",
+  "payment_cycle.gql_create_payment_cycle_perms": "Payment Cycle | Create Payment Cycle",
+  "payment_cycle.gql_update_payment_cycle_perms": "Payment Cycle | Update Payment Cycle",
+  "payment_cycle.gql_delete_payment_cycle_perms": "Payment Cycle | Delete Payment Cycle"
 }
