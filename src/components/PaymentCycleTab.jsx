@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid, Button } from '@mui/material';
 import { Contributions } from '@openimis/fe-core';
-import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@mui/styles';
 import {
   PAYMENT_CYCLE_BENEFITS_TAB_VALUE,
   PAYMENT_CYCLE_TABS_LABEL_CONTRIBUTION_KEY,

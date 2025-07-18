@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import {
   Form, Helmet, useTranslations, useModulesManager, useHistory, journalize, coreAlert,

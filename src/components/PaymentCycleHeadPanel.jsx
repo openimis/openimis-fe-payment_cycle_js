@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
-import { Divider, Grid, Typography } from '@material-ui/core';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { Divider, Grid, Typography } from '@mui/material';
+import { withStyles, withTheme } from '@mui/styles';
 
 import {
   FormattedMessage,

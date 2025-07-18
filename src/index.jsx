@@ -3,7 +3,7 @@
 
 import React from 'react';
 
-import { LocalOffer } from '@material-ui/icons';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 import { FormattedMessage } from '@openimis/fe-core';
 import { RIGHT_PAYMENT_CYCLE_SEARCH } from './constants';
@@ -42,7 +42,7 @@ const DEFAULT_CONFIG = {
   'invoice.MainMenu': [
     {
       text: <FormattedMessage module="paymentCycle" id="paymentCycles.page.title" />,
-      icon: <LocalOffer />,
+      icon: <LocalOfferIcon />,
       route: `/${ROUTE_PAYMENT_CYCLES}`,
       filter: (rights) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH),
       id: 'legalAndFinance.paymentCycles',

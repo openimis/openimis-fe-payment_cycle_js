@@ -4,9 +4,9 @@ import {
   Helmet,
   useTranslations, useModulesManager, useHistory, withTooltip,
 } from '@openimis/fe-core';
-import { makeStyles } from '@material-ui/styles';
-import { Fab } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@mui/styles';
+import { Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import {
   MODULE_NAME,
   RIGHT_PAYMENT_CYCLE_SEARCH, PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE, RIGHT_PAYMENT_CYCLE_CREATE,
