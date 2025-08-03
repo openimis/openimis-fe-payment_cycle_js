@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import BenefitPaymentDuplicatesTable from '../tables/BenefitPaymentDuplicatesTable';
 
-const useStyles = makeStyles((theme) => ({
-  paper: theme.paper.paper,
-  title: theme.paper.title,
+const StyledDeduplicationPaymentResolutionTask = styled('div')(({ theme }) => ({
+  '& .paper': theme.paper.paper,
+  '& .title': theme.paper.title,
 }));
 
 function DeduplicationPaymentResolutionTaskDisplay({
@@ -13,7 +13,6 @@ function DeduplicationPaymentResolutionTaskDisplay({
 }) {
   if (!businessData) return null;
 
-  const classes = useStyles();
   const completedData = jsonExt?.additional_resolve_data
     ? Object.values(jsonExt.additional_resolve_data)[0].values
     : null;
@@ -43,26 +42,28 @@ function DeduplicationPaymentResolutionTaskDisplay({
   benefits.sort((a, b) => new Date(a.date_created) - new Date(b.date_created));
 
   return (
-    <div>
-      <Typography className={classes.title} style={{ textAlign: 'center' }}>
-        {JSON.stringify(businessData?.column_values)}
-        {' '}
-        ,
-        count:
-        {' '}
-        {businessData?.count}
-      </Typography>
+    <StyledDeduplicationPaymentResolutionTask>
       <div>
-        <BenefitPaymentDuplicatesTable
-          headers={headers}
-          rows={benefits}
-          setAdditionalData={setAdditionalData}
-          completedData={completedData}
-          businessData={businessData}
-        />
+        <Typography className="title" style={{ textAlign: 'center' }}>
+          {JSON.stringify(businessData?.column_values)}
+          {' '}
+          ,
+          count:
+          {' '}
+          {businessData?.count}
+        </Typography>
+        <div>
+          <BenefitPaymentDuplicatesTable
+            headers={headers}
+            rows={benefits}
+            setAdditionalData={setAdditionalData}
+            completedData={completedData}
+            businessData={businessData}
+          />
 
+        </div>
       </div>
-    </div>
+    </StyledDeduplicationPaymentResolutionTask>
   );
 }
 

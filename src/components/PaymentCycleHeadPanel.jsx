@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import { Divider, Grid, Typography } from '@mui/material';
-import { withStyles, withTheme } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
 import {
   FormattedMessage,
@@ -15,23 +15,23 @@ import {
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 import { codeSetValid, codeValidationCheck, codeValidationClear } from '../actions';
 
-const styles = (theme) => ({
-  tableTitle: theme.table.title,
-  item: theme.paper.item,
-  fullHeight: {
+const StyledPaymentCycleHeadPanel = styled('div')(({ theme }) => ({
+  '& .tableTitle': theme.table.title,
+  '& .item': theme.paper.item,
+  '& .fullHeight': {
     height: '100%',
   },
-});
+}));
 
-const renderHeadPanelTitle = (classes) => (
-  <Grid container className={classes.tableTitle}>
+const renderHeadPanelTitle = () => (
+  <Grid container className="tableTitle">
     <Grid item>
       <Grid
         container
         align="center"
         justify="center"
         direction="column"
-        className={classes.fullHeight}
+        className="fullHeight"
       >
         <Grid item>
           <Typography>
@@ -52,7 +52,6 @@ class PaymentCycleHeadPanel extends FormPanel {
   render() {
     const {
       edited,
-      classes,
       readOnly,
       isCodeValid,
       isCodeValidating,
@@ -61,11 +60,11 @@ class PaymentCycleHeadPanel extends FormPanel {
     } = this.props;
     const paymentCycle = { ...edited };
     return (
-      <>
-        {renderHeadPanelTitle(classes)}
+      <StyledPaymentCycleHeadPanel>
+        {renderHeadPanelTitle()}
         <Divider />
-        <Grid container className={classes.item}>
-          <Grid item xs={3} className={classes.item}>
+        <Grid container className="item">
+          <Grid item xs={3} className="item">
             <ValidatedTextInput
               module="paymentCycle"
               label="PaymentCycleHeadPanel.label.code"
@@ -84,7 +83,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               setValidAction={codeSetValid}
             />
           </Grid>
-          <Grid item xs={3} className={classes.item}>
+          <Grid item xs={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.startDate}
@@ -95,7 +94,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('startDate', v)}
             />
           </Grid>
-          <Grid item xs={3} className={classes.item}>
+          <Grid item xs={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.endDate}
@@ -106,7 +105,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('endDate', v)}
             />
           </Grid>
-          <Grid item xs={3} className={classes.item}>
+          <Grid item xs={3} className="item">
             <PaymentCycleStatusPicker
               value={paymentCycle?.status}
               required
@@ -117,7 +116,7 @@ class PaymentCycleHeadPanel extends FormPanel {
             />
           </Grid>
         </Grid>
-      </>
+      </StyledPaymentCycleHeadPanel>
     );
   }
 }
@@ -131,5 +130,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default withModulesManager(
-  connect(mapStateToProps)(injectIntl(withTheme(withStyles(styles)(PaymentCycleHeadPanel)))),
+  connect(mapStateToProps)(injectIntl(PaymentCycleHeadPanel)),
 );

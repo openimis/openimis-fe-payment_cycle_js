@@ -2,14 +2,22 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import { PublishedComponent, TextInput } from '@openimis/fe-core';
 import { Grid } from '@mui/material';
-import { withTheme, withStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import _debounce from 'lodash/debounce';
-import { defaultFilterStyles } from '../utils/styles';
 import { DEFAULT_DEBOUNCE_TIME, EMPTY_STRING, CONTAINS_LOOKUP } from '../constants';
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 
+const StyledPaymentCycleFilter = styled('div')(({ theme }) => ({
+  '& .form': {
+    padding: 0,
+  },
+  '& .item': {
+    padding: theme.spacing(1),
+  },
+}));
+
 function PaymentCycleFilter({
-  classes, filters, onChangeFilters,
+  filters, onChangeFilters,
 }) {
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFAULT_DEBOUNCE_TIME);
   const filterValue = (filterName) => filters?.[filterName]?.value;
@@ -37,62 +45,64 @@ function PaymentCycleFilter({
   };
 
   return (
-    <Grid container className={classes.form}>
-      <Grid item xs={2} className={classes.item}>
-        <TextInput
-          module="paymentCycle"
-          label="label.code"
-          value={filterTextFieldValue('code')}
-          onChange={onChangeStringFilter('code', CONTAINS_LOOKUP)}
-        />
+    <StyledPaymentCycleFilter>
+      <Grid container className="form">
+        <Grid item xs={2} className="item">
+          <TextInput
+            module="paymentCycle"
+            label="label.code"
+            value={filterTextFieldValue('code')}
+            onChange={onChangeStringFilter('code', CONTAINS_LOOKUP)}
+          />
+        </Grid>
+        <Grid item xs={2} className="item">
+          <PublishedComponent
+            pubRef="core.DatePicker"
+            module="paymentCycle"
+            label="label.dateValidFrom"
+            value={filterValue('dateValidFrom_Gte')}
+            onChange={(v) => onChangeFilters([
+              {
+                id: 'startDate_Gte',
+                value: v,
+                filter: `startDate_Gte: "${v}"`,
+              },
+            ])}
+          />
+        </Grid>
+        <Grid item xs={2} className="item">
+          <PublishedComponent
+            pubRef="core.DatePicker"
+            module="paymentCycle"
+            label="label.dateValidTo"
+            value={filterValue('dateValidTo_Lte')}
+            onChange={(v) => onChangeFilters([
+              {
+                id: 'endDate_Lte',
+                value: v,
+                filter: `endDate_Lte: "${v}"`,
+              },
+            ])}
+          />
+        </Grid>
+        <Grid item xs={2} className="item">
+          <PaymentCycleStatusPicker
+            module="paymentCycle"
+            label="label.status"
+            withNull
+            value={filterValue('status')}
+            onChange={(value) => onChangeFilters([
+              {
+                id: 'status',
+                value,
+                filter: value ? `status: ${value}` : '',
+              },
+            ])}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <PublishedComponent
-          pubRef="core.DatePicker"
-          module="paymentCycle"
-          label="label.dateValidFrom"
-          value={filterValue('dateValidFrom_Gte')}
-          onChange={(v) => onChangeFilters([
-            {
-              id: 'startDate_Gte',
-              value: v,
-              filter: `startDate_Gte: "${v}"`,
-            },
-          ])}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <PublishedComponent
-          pubRef="core.DatePicker"
-          module="paymentCycle"
-          label="label.dateValidTo"
-          value={filterValue('dateValidTo_Lte')}
-          onChange={(v) => onChangeFilters([
-            {
-              id: 'endDate_Lte',
-              value: v,
-              filter: `endDate_Lte: "${v}"`,
-            },
-          ])}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <PaymentCycleStatusPicker
-          module="paymentCycle"
-          label="label.status"
-          withNull
-          value={filterValue('status')}
-          onChange={(value) => onChangeFilters([
-            {
-              id: 'status',
-              value,
-              filter: value ? `status: ${value}` : '',
-            },
-          ])}
-        />
-      </Grid>
-    </Grid>
+    </StyledPaymentCycleFilter>
   );
 }
 
-export default injectIntl(withTheme(withStyles(defaultFilterStyles)(PaymentCycleFilter)));
+export default injectIntl(PaymentCycleFilter);

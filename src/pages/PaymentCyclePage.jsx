@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import {
   Form, Helmet, useTranslations, useModulesManager, useHistory, journalize, coreAlert,
@@ -15,13 +15,12 @@ import {
 } from '../actions';
 import PaymentCycleTab from '../components/PaymentCycleTab';
 
-const useStyles = makeStyles((theme) => ({
-  page: theme.page,
+const StyledPaymentCyclePage = styled('div')(({ theme }) => ({
+  ...theme.page,
 }));
 
 function PaymentCyclePage({ paymentCycleUuid }) {
   const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
-  const classes = useStyles();
   const dispatch = useDispatch();
   const modulesManager = useModulesManager();
   const history = useHistory();
@@ -119,7 +118,7 @@ function PaymentCyclePage({ paymentCycleUuid }) {
   const canSave = () => !isMandatoryFieldsEmpty() && doesPaymentPlanChange() && isValid();
 
   return (
-    <div className={classes.page}>
+    <StyledPaymentCyclePage>
       <Helmet title={formatMessageWithValues('paymentCycle.PaymentCyclePage.title', titleParams(paymentCycle))} />
       <Form
         key={refresh}
@@ -140,7 +139,7 @@ function PaymentCyclePage({ paymentCycleUuid }) {
         saveTooltip={formatMessage('saveButton.tooltip')}
         readOnly={paymentCycleUuid}
       />
-    </div>
+    </StyledPaymentCyclePage>
   );
 }
 

@@ -4,7 +4,7 @@ import {
   Helmet,
   useTranslations, useModulesManager, useHistory, withTooltip,
 } from '@openimis/fe-core';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {
@@ -13,14 +13,13 @@ import {
 } from '../constants';
 import PaymentCycleSearcher from '../components/PaymentCycleSearcher';
 
-const useStyles = makeStyles((theme) => ({
-  page: theme.page,
-  fab: theme.fab,
+const StyledPaymentCyclesPage = styled('div')(({ theme }) => ({
+  ...theme.page,
+  '& .fab': theme.fab,
 }));
 
 function PaymentCyclesPage() {
   const modulesManager = useModulesManager();
-  const classes = useStyles();
   const history = useHistory();
   const rights = useSelector((store) => store.core.user.i_user.rights ?? []);
   const { formatMessage } = useTranslations(MODULE_NAME, modulesManager);
@@ -30,20 +29,20 @@ function PaymentCyclesPage() {
   );
 
   return (
-    <div className={classes.page}>
+    <StyledPaymentCyclesPage>
       <Helmet title={formatMessage('paymentCycle.page.title')} />
       {rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH)
             && <PaymentCycleSearcher />}
       {rights.includes(RIGHT_PAYMENT_CYCLE_CREATE)
             && withTooltip(
-              <div className={classes.fab}>
+              <div className="fab">
                 <Fab color="primary" onClick={onCreate}>
                   <AddIcon />
                 </Fab>
               </div>,
               formatMessage('createButton.tooltip'),
             )}
-    </div>
+    </StyledPaymentCyclesPage>
   );
 }
 

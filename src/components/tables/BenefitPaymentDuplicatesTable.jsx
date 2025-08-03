@@ -2,40 +2,41 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import {
-  makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Checkbox,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Checkbox,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
   FormattedMessage,
 } from '@openimis/fe-core';
 
-const useStyles = makeStyles((theme) => ({
-  paper: theme.paper.paper,
-  table: theme.table,
-  tableTitle: theme.table.title,
-  tableHeader: theme.table.header,
-  tableRow: theme.table.row,
-  title: theme.paper.title,
-  tableDisabledRow: theme.table.disabledRow,
-  tableDisabledCell: theme.table.disabledCell,
-  tableContainer: {
+const StyledBenefitPaymentDuplicatesTable = styled('div')(({ theme }) => ({
+  '& .paper': theme.paper.paper,
+  '& .table': theme.table,
+  '& .tableTitle': theme.table.title,
+  '& .tableHeader': theme.table.header,
+  '& .tableRow': theme.table.row,
+  '& .title': theme.paper.title,
+  '& .tableDisabledRow': theme.table.disabledRow,
+  '& .tableDisabledCell': theme.table.disabledCell,
+  '& .tableContainer': {
     overflow: 'auto',
   },
-  hoverableCell: {
+  '& .hoverableCell': {
     '&:hover': {
       backgroundColor: '#f0f0f0',
     },
     cursor: 'pointer',
   },
-  selectedCell: {
+  '& .selectedCell': {
     backgroundColor: '#a1caf1',
   },
-  checkboxCell: {
+  '& .checkboxCell': {
     textAlign: 'center',
   },
-  deactivatedRow: {
+  '& .deactivatedRow': {
     opacity: 0.5,
   },
-  strikethrough: {
+  '& .strikethrough': {
     textDecoration: 'line-through',
   },
 }));
@@ -43,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 function BenefitPaymentDuplicatesTable({
   headers, rows, completedData, setAdditionalData, businessData,
 }) {
-  const classes = useStyles();
   const shouldCrossText = (rowIndex) => rows[rowIndex]?.is_deleted;
   const [selectedRows, setSelectedRows] = useState([]);
   const [isDeleted, setIsDeleted] = useState(!!completedData);
@@ -75,50 +75,52 @@ function BenefitPaymentDuplicatesTable({
   const shouldDisableCell = (rowIndex) => selectedRows.includes(rowIndex);
 
   return (
-    <div className={classes.tableContainer}>
-      <TableContainer className={classes.paper}>
-        <Table size="small" className={classes.table} aria-label="dynamic table">
-          <TableHead className={classes.header}>
-            <TableRow className={classes.header}>
-              <TableCell key="checkbox-header-merge" className={classes.checkboxCell}>
-                <FormattedMessage module="paymentCycle" id="PaymentDuplicatesTable.merge.header" />
-              </TableCell>
-              {headers.map((header, index) => (
-                <TableCell key={index}>{header}</TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row, rowIndex) => (
-              <TableRow
-                key={rowIndex}
-                className={classes.tableRow}
-              >
-                <TableCell key={`checkbox-cell-${rowIndex}`} className={classes.checkboxCell}>
-                  <Checkbox
-                    color="primary"
-                    checked={selectedRows.includes(rowIndex)}
-                    onChange={() => handleCheckboxChange(rowIndex)}
-                    disabled={isDeleted || (selectedRows.length === rows.length - 1 && !selectedRows.includes(rowIndex))}
-                  />
+    <StyledBenefitPaymentDuplicatesTable>
+      <div className="tableContainer">
+        <TableContainer className="paper">
+          <Table size="small" className="table" aria-label="dynamic table">
+            <TableHead className="header">
+              <TableRow className="header">
+                <TableCell key="checkbox-header-merge" className="checkboxCell">
+                  <FormattedMessage module="paymentCycle" id="PaymentDuplicatesTable.merge.header" />
                 </TableCell>
-                {headers.map((header, headerIndex) => (
-                  <TableCell
-                    key={headerIndex}
-                    className={`} 
-                    ${shouldDisableCell(rowIndex) || isDeleted ? classes.tableDisabledCell : ''}
-                    ${shouldCrossText(rowIndex) ? classes.strikethrough : ''}
-                    `}
-                  >
-                    {row[header]}
-                  </TableCell>
+                {headers.map((header, index) => (
+                  <TableCell key={index}>{header}</TableCell>
                 ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+            </TableHead>
+            <TableBody>
+              {rows.map((row, rowIndex) => (
+                <TableRow
+                  key={rowIndex}
+                  className="tableRow"
+                >
+                  <TableCell key={`checkbox-cell-${rowIndex}`} className="checkboxCell">
+                    <Checkbox
+                      color="primary"
+                      checked={selectedRows.includes(rowIndex)}
+                      onChange={() => handleCheckboxChange(rowIndex)}
+                      disabled={isDeleted || (selectedRows.length === rows.length - 1 && !selectedRows.includes(rowIndex))}
+                    />
+                  </TableCell>
+                  {headers.map((header, headerIndex) => (
+                    <TableCell
+                      key={headerIndex}
+                      className={`} 
+                      ${shouldDisableCell(rowIndex) || isDeleted ? 'tableDisabledCell' : ''}
+                      ${shouldCrossText(rowIndex) ? 'strikethrough' : ''}
+                      `}
+                    >
+                      {row[header]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </StyledBenefitPaymentDuplicatesTable>
   );
 }
 

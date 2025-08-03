@@ -6,15 +6,15 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { formatMessage } from '@openimis/fe-core';
-import { withTheme, withStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DeduplicationSummaryTable from '../tables/DeduplicationSummaryTable';
 import { createDeduplicationTasks, fetchDeduplicationSummary } from '../../actions';
 
-const styles = (theme) => ({
-  item: theme.paper.item,
-});
+const StyledDeduplicationSummaryDialog = styled('div')(({ theme }) => ({
+  '& .item': theme.paper.item,
+}));
 
 function DeduplicationSummaryDialog({
   intl,
@@ -40,68 +40,70 @@ function DeduplicationSummaryDialog({
   };
 
   return (
-    <Dialog
-      open={showSummaryDialog}
-      onClose={handleClose}
-      PaperProps={{
-        style: {
-          width: 900,
-          maxWidth: 900,
-        },
-      }}
-    >
-      <DialogTitle
-        style={{
-          marginTop: '10px',
+    <StyledDeduplicationSummaryDialog>
+      <Dialog
+        open={showSummaryDialog}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            width: 900,
+            maxWidth: 900,
+          },
         }}
       >
-        {formatMessage(intl, 'deduplication', 'deduplicate.summary.title')}
-      </DialogTitle>
-      <DialogContent>
-        <DeduplicationSummaryTable
-          columnParam={columnParam}
-          paymentCycle={paymentCycle}
-          fetchDeduplicationSummary={fetchDeduplicationSummary}
-          setSummary={setSummary}
-        />
-      </DialogContent>
-      <DialogActions
-        style={{
-          display: 'inline',
-          paddingLeft: '10px',
-          marginTop: '25px',
-          marginBottom: '15px',
-        }}
-      >
-        <div>
-          <div style={{ float: 'left' }}>
-            <Button
-              onClick={() => onDeduplicationTasksClick()}
-              variant="outlined"
-              autoFocus
-              disabled={!summary}
-              style={{ margin: '0 16px' }}
-            >
-              {formatMessage(intl, 'deduplication', 'deduplicate.button.createDeduplicationReviewTask')}
-            </Button>
-          </div>
-          <div style={{
-            float: 'right',
-            paddingRight: '16px',
+        <DialogTitle
+          style={{
+            marginTop: '10px',
           }}
-          >
-            <Button
-              onClick={handleClose}
-              variant="outlined"
-              autoFocus
-              style={{ margin: '0 16px' }}
+        >
+          {formatMessage(intl, 'deduplication', 'deduplicate.summary.title')}
+        </DialogTitle>
+        <DialogContent>
+          <DeduplicationSummaryTable
+            columnParam={columnParam}
+            paymentCycle={paymentCycle}
+            fetchDeduplicationSummary={fetchDeduplicationSummary}
+            setSummary={setSummary}
+          />
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'inline',
+            paddingLeft: '10px',
+            marginTop: '25px',
+            marginBottom: '15px',
+          }}
+        >
+          <div>
+            <div style={{ float: 'left' }}>
+              <Button
+                onClick={() => onDeduplicationTasksClick()}
+                variant="outlined"
+                autoFocus
+                disabled={!summary}
+                style={{ margin: '0 16px' }}
+              >
+                {formatMessage(intl, 'deduplication', 'deduplicate.button.createDeduplicationReviewTask')}
+              </Button>
+            </div>
+            <div style={{
+              float: 'right',
+              paddingRight: '16px',
+            }}
             >
-              {formatMessage(intl, 'deduplication', 'deduplicate.button.cancel')}
-            </Button>
+              <Button
+                onClick={handleClose}
+                variant="outlined"
+                autoFocus
+                style={{ margin: '0 16px' }}
+              >
+                {formatMessage(intl, 'deduplication', 'deduplicate.button.cancel')}
+              </Button>
+            </div>
           </div>
-        </div>
-      </DialogActions>
-    </Dialog>
+        </DialogActions>
+      </Dialog>
+    </StyledDeduplicationSummaryDialog>
   );
 }
 
@@ -115,5 +117,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch);
 
 export default injectIntl(
-  withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DeduplicationSummaryDialog))),
+  connect(mapStateToProps, mapDispatchToProps)(DeduplicationSummaryDialog),
 );
