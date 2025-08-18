@@ -8,7 +8,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.jsx'),
       name: 'OpenImisFePaymentCycle',
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format) => `index.${format === 'es' ? 'es' : 'cjs'}.js`,
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
