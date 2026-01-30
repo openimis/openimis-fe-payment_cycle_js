@@ -129,4 +129,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   dispatch,
 );
 
+export { PaymentCycleSearcher };
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentCycleSearcher);

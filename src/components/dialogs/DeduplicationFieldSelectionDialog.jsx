@@ -160,6 +160,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchGlobalSchema,
 }, dispatch);
 
+export { StyledDeduplicationFieldSelectionDialog };
 export default injectIntl(
   connect(mapStateToProps, mapDispatchToProps)(DeduplicationFieldSelectionDialog),
 );

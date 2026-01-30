@@ -147,4 +147,5 @@ const mapStateToProps = (state, props) => ({
   paymentCycleUuid: props.match.params.payment_cycle_uuid,
 });
 
+export { StyledPaymentCyclePage };
 export default connect(mapStateToProps, null)(PaymentCyclePage);

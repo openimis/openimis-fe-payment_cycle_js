@@ -25,7 +25,7 @@ const StyledPaymentCycleHeadPanel = styled('div')(({ theme }) => ({
 
 const renderHeadPanelTitle = () => (
   <Grid container className="tableTitle">
-    <Grid item>
+    <Grid>
       <Grid
         container
         align="center"
@@ -33,7 +33,7 @@ const renderHeadPanelTitle = () => (
         direction="column"
         className="fullHeight"
       >
-        <Grid item>
+        <Grid>
           <Typography>
             <FormattedMessage module="paymentCycle" id="paymentCycle.PaymentCycleHeadPanel.subtitle" />
           </Typography>
@@ -64,7 +64,7 @@ class PaymentCycleHeadPanel extends FormPanel {
         {renderHeadPanelTitle()}
         <Divider />
         <Grid container className="item">
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <ValidatedTextInput
               module="paymentCycle"
               label="PaymentCycleHeadPanel.label.code"
@@ -83,7 +83,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               setValidAction={codeSetValid}
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.startDate}
@@ -94,7 +94,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('startDate', v)}
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.endDate}
@@ -105,7 +105,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('endDate', v)}
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PaymentCycleStatusPicker
               value={paymentCycle?.status}
               required
@@ -129,6 +129,7 @@ const mapStateToProps = (state) => ({
   code: state.paymentCycle?.paymentCycle?.code,
 });
 
+export { StyledPaymentCycleHeadPanel };
 export default withModulesManager(
   connect(mapStateToProps)(injectIntl(PaymentCycleHeadPanel)),
 );

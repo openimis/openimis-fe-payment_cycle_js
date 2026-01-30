@@ -47,7 +47,7 @@ function PaymentCycleFilter({
   return (
     <StyledPaymentCycleFilter>
       <Grid container className="form">
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <TextInput
             module="paymentCycle"
             label="label.code"
@@ -55,7 +55,7 @@ function PaymentCycleFilter({
             onChange={onChangeStringFilter('code', CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="paymentCycle"
@@ -70,7 +70,7 @@ function PaymentCycleFilter({
             ])}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="paymentCycle"
@@ -85,7 +85,7 @@ function PaymentCycleFilter({
             ])}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <PaymentCycleStatusPicker
             module="paymentCycle"
             label="label.status"
@@ -105,4 +105,5 @@ function PaymentCycleFilter({
   );
 }
 
+export { StyledPaymentCycleFilter };
 export default injectIntl(PaymentCycleFilter);
