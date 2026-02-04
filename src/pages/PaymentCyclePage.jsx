@@ -16,7 +16,7 @@ import {
 import PaymentCycleTab from '../components/PaymentCycleTab';
 
 const StyledPaymentCyclePage = styled('div')(({ theme }) => ({
-  ...theme.page,
+  ...theme.page ?? {},
 }));
 
 function PaymentCyclePage({ paymentCycleUuid }) {

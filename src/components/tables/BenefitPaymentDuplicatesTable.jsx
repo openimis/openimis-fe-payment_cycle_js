@@ -10,14 +10,14 @@ import {
 } from '@openimis/fe-core';
 
 const StyledBenefitPaymentDuplicatesTable = styled('div')(({ theme }) => ({
-  '& .paper': theme.paper.paper,
-  '& .table': theme.table,
-  '& .tableTitle': theme.table.title,
-  '& .tableHeader': theme.table.header,
-  '& .tableRow': theme.table.row,
-  '& .title': theme.paper.title,
-  '& .tableDisabledRow': theme.table.disabledRow,
-  '& .tableDisabledCell': theme.table.disabledCell,
+  '& .paper': theme.paper?.paper ?? {},
+  '& .table': theme.table ?? {},
+  '& .tableTitle': theme.table?.title ?? {},
+  '& .tableHeader': theme.table?.header ?? {},
+  '& .tableRow': theme.table?.row ?? {},
+  '& .title': theme.paper?.title ?? {},
+  '& .tableDisabledRow': theme.table?.disabledRow ?? {},
+  '& .tableDisabledCell': theme.table?.disabledCell ?? {},
   '& .tableContainer': {
     overflow: 'auto',
   },

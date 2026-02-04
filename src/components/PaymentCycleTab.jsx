@@ -11,8 +11,8 @@ import {
 import downloadDuplicatedPayments from '../utils/export';
 
 const StyledPaymentCycleTab = styled('div')(({ theme }) => ({
-  '& .paper': theme.paper.paper,
-  '& .tableTitle': theme.table.title,
+  '& .paper': theme.paper?.paper ?? {},
+  '& .tableTitle': theme.table?.title ?? {},
   '& .tabs': {
     display: 'flex',
     alignItems: 'center',

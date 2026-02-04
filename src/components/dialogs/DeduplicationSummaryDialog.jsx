@@ -13,7 +13,7 @@ import DeduplicationSummaryTable from '../tables/DeduplicationSummaryTable';
 import { createDeduplicationTasks, fetchDeduplicationSummary } from '../../actions';
 
 const StyledDeduplicationSummaryDialog = styled('div')(({ theme }) => ({
-  '& .item': theme.paper.item,
+  '& .item': theme.paper?.item ?? {},
 }));
 
 function DeduplicationSummaryDialog({

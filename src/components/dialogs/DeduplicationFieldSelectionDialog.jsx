@@ -16,7 +16,7 @@ import DeduplicationSummaryDialog from './DeduplicationSummaryDialog';
 import { fetchGlobalSchema } from '../../actions';
 
 const StyledDeduplicationFieldSelectionDialog = styled('div')(({ theme }) => ({
-  '& .item': theme.paper.item,
+  '& .item': theme.paper?.item ?? {},
 }));
 
 function DeduplicationFieldSelectionDialog({

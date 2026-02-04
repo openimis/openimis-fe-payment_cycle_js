@@ -4,8 +4,8 @@ import { styled } from '@mui/material/styles';
 import BenefitPaymentDuplicatesTable from '../tables/BenefitPaymentDuplicatesTable';
 
 const StyledDeduplicationPaymentResolutionTask = styled('div')(({ theme }) => ({
-  '& .paper': theme.paper.paper,
-  '& .title': theme.paper.title,
+  '& .paper': theme.paper?.paper ?? {},
+  '& .title': theme.paper?.title ?? {},
 }));
 
 function DeduplicationPaymentResolutionTaskDisplay({

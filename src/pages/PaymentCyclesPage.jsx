@@ -14,8 +14,8 @@ import {
 import PaymentCycleSearcher from '../components/PaymentCycleSearcher';
 
 const StyledPaymentCyclesPage = styled('div')(({ theme }) => ({
-  ...theme.page,
-  '& .fab': theme.fab,
+  ...theme.page ?? {},
+  '& .fab': theme.fab ?? {},
 }));
 
 function PaymentCyclesPage() {
