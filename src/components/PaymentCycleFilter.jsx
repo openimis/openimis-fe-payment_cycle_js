@@ -1,6 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import { PublishedComponent, TextInput } from '@openimis/fe-core';
+import { PublishedComponent, TextInput, GRID_RESPONSIVE_STANDARD } from '@openimis/fe-core';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import _debounce from 'lodash/debounce';
@@ -9,7 +9,7 @@ import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 
 const StyledPaymentCycleFilter = styled('div')(({ theme }) => ({
   '& .form': {
-    padding: 0,
+    padding: theme.spacing(1),
   },
   '& .item': {
     padding: theme.spacing(1),
@@ -47,7 +47,7 @@ function PaymentCycleFilter({
   return (
     <StyledPaymentCycleFilter>
       <Grid container className="form">
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="paymentCycle"
             label="label.code"
@@ -55,7 +55,7 @@ function PaymentCycleFilter({
             onChange={onChangeStringFilter('code', CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="paymentCycle"
@@ -70,7 +70,7 @@ function PaymentCycleFilter({
             ])}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="paymentCycle"
@@ -85,7 +85,7 @@ function PaymentCycleFilter({
             ])}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PaymentCycleStatusPicker
             module="paymentCycle"
             label="label.status"

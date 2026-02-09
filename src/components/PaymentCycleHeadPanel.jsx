@@ -11,13 +11,20 @@ import {
   PublishedComponent,
   ValidatedTextInput,
   withModulesManager,
+  GRID_RESPONSIVE_STANDARD,
 } from '@openimis/fe-core';
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 import { codeSetValid, codeValidationCheck, codeValidationClear } from '../actions';
 
 const StyledPaymentCycleHeadPanel = styled('div')(({ theme }) => ({
   '& .tableTitle': theme.table?.title ?? {},
-  '& .item': theme.paper?.item ?? {},
+  '& .form': {
+    padding: theme.spacing(1),
+  },
+  '& .item': {
+    padding: theme.spacing(1),
+    ...(theme.paper?.item ?? {}),
+  },
   '& .fullHeight': {
     height: '100%',
   },
@@ -63,8 +70,8 @@ class PaymentCycleHeadPanel extends FormPanel {
       <StyledPaymentCycleHeadPanel>
         {renderHeadPanelTitle()}
         <Divider />
-        <Grid container className="item">
-          <Grid size={3} className="item">
+        <Grid container className="form">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <ValidatedTextInput
               module="paymentCycle"
               label="PaymentCycleHeadPanel.label.code"
@@ -83,7 +90,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               setValidAction={codeSetValid}
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.startDate}
@@ -94,7 +101,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('startDate', v)}
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.endDate}
@@ -105,7 +112,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('endDate', v)}
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PaymentCycleStatusPicker
               value={paymentCycle?.status}
               required
