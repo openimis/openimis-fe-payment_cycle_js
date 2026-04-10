@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-  Helmet,
+  Helmet, GetIconComponent,
   useTranslations, useModulesManager, useHistory, withTooltip,
 } from '@openimis/fe-core';
 import { styled } from '@mui/material/styles';
 import { Fab } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+const AddIcon = GetIconComponent("Add");
 import {
   MODULE_NAME,
   RIGHT_PAYMENT_CYCLE_SEARCH, PAYMENT_CYCLE_ROUTE_PAYMENT_CYCLES_PAYMENT_CYCLE, RIGHT_PAYMENT_CYCLE_CREATE,

@@ -3,10 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 
 import { IconButton, Tooltip } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import {
-  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
+  GetIconComponent, Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
 } from '@openimis/fe-core';
 import { fetchPaymentCycles } from '../actions';
 import {
@@ -17,6 +16,7 @@ import {
 } from '../constants';
 import PaymentCycleFilter from './PaymentCycleFilter';
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
+const VisibilityIcon = GetIconComponent("Visibility");
 
 function PaymentCycleSearcher({
   fetchingPaymentCycles,

@@ -3,9 +3,8 @@
 
 import React from 'react';
 
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
-import { FormattedMessage } from '@openimis/fe-core';
+import { GetIconComponent, FormattedMessage } from '@openimis/fe-core';
 import { RIGHT_PAYMENT_CYCLE_SEARCH } from './constants';
 import reducer from './reducer';
 import messages_en from './translations/en.json';
@@ -20,6 +19,7 @@ import {
   DeduplicationPaymentResolutionItemFormatters,
   DeduplicationPaymentResolutionTaskTableHeaders,
 } from './components/tasks/DeduplicationPaymentResolutionTask';
+const LocalOfferIcon = GetIconComponent("LocalOffer");
 
 const ROUTE_PAYMENT_CYCLES = 'paymentCycles';
 const ROUTE_PAYMENT_CYCLE = 'paymentCycles/paymentCycle';
