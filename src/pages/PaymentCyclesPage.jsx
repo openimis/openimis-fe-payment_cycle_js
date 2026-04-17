@@ -1,9 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import {
   Helmet, GetIconComponent,
-  useTranslations, useModulesManager, useHistory, withTooltip,
+  useTranslations, useModulesManager, useHistory, withHistory, withTooltip, withModulesManager
 } from '@openimis/fe-core';
+import { injectIntl } from "react-intl"
 import { styled } from '@mui/material/styles';
 import { Fab } from '@mui/material';
 const AddIcon = GetIconComponent("Add");
@@ -46,4 +47,15 @@ function PaymentCyclesPage() {
   );
 }
 
-export default PaymentCyclesPage;
+const mapStateToProps = (state) => ({
+  module: state.core?.savedPagination?.module,
+  user: state.core?.user,
+});
+const mapDispatchToProps = null;
+
+export default withHistory(
+  withModulesManager(
+    connect(mapStateToProps, mapDispatchToProps)(injectIntl(PaymentCyclesPage)),
+  ),
+);
+

@@ -36,28 +36,25 @@ const DEFAULT_CONFIG = {
     { key: 'paymentCycle.PaymentCyclePicker', ref: PaymentCyclePicker },
   ],
   'core.Router': [
-    { path: ROUTE_PAYMENT_CYCLES, component: PaymentCyclesPage },
+    { path: ROUTE_PAYMENT_CYCLES, text: "paymentCycle.paymentCycles.page.title", icon: "LocalOfferIcon",rights: [RIGHT_PAYMENT_CYCLE_SEARCH], id: 'legalAndFinance.paymentCycles', component: PaymentCyclesPage },
     { path: `${ROUTE_PAYMENT_CYCLE}/:payment_cycle_uuid?`, component: PaymentCyclePage },
   ],
   'invoice.MainMenu': [
     {
-      text: <FormattedMessage module="paymentCycle" id="paymentCycles.page.title" />,
-      icon: <LocalOfferIcon />,
-      route: `/${ROUTE_PAYMENT_CYCLES}`,
-      filter: (rights) => rights.includes(RIGHT_PAYMENT_CYCLE_SEARCH),
-      id: 'legalAndFinance.paymentCycles',
+      route: ROUTE_PAYMENT_CYCLES,
+      
     },
   ],
   'paymentCycle.TabPanel.label': [PaymentCycleBenefitsTabLabel, PaymentCycleTaskTabLabel],
   'paymentCycle.TabPanel.panel': [PaymentCycleBenefitsTabPanel, PaymentCycleTaskTabPanel],
   'tasksManagement.tasks': [{
-    text: <FormattedMessage module="paymentCycle" id="paymentCycle.tasks.update.title" />,
+    text: "paymentCycle.paymentCycle.tasks.update.title",
     tableHeaders: PaymentCycleTaskTableHeaders,
     itemFormatters: PaymentCycleTaskItemFormatters,
     taskSource: ['PaymentCycleService'],
   },
   {
-    text: <FormattedMessage module="paymentCycle" id="tasks.deduplication.title" />,
+    text: "paymentCycle.tasks.deduplication.title",
     tableHeaders: DeduplicationPaymentResolutionTaskTableHeaders,
     itemFormatters: DeduplicationPaymentResolutionItemFormatters,
     taskSource: ['CreateDeduplicationPaymentReviewTasksService'],
