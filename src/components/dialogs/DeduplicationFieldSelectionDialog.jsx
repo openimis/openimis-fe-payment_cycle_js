@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { injectIntl } from 'react-intl';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import {
   formatMessage,
 } from '@openimis/fe-core';
-import { withTheme, withStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DeduplicationFieldPicker from '../../pickers/DeduplicationFieldPicker';
 import DeduplicationSummaryDialog from './DeduplicationSummaryDialog';
 import { fetchGlobalSchema } from '../../actions';
 
-const styles = (theme) => ({
-  item: theme.paper.item,
-});
+const StyledDeduplicationFieldSelectionDialog = styled('div')(({ theme }) => ({
+  '& .item': theme.paper?.item ?? {},
+}));
 
 function DeduplicationFieldSelectionDialog({
   intl,
-  classes,
   paymentCycle,
   fetchGlobalSchema,
   globalSchema,
@@ -59,12 +58,12 @@ function DeduplicationFieldSelectionDialog({
   };
 
   return (
-    <>
+    <StyledDeduplicationFieldSelectionDialog>
       <Button
         onClick={handleOpen}
         variant="outlined"
         color="#DFEDEF"
-        className={classes.button}
+        className="button"
         style={{
           border: '0px',
           marginTop: '6px',
@@ -147,7 +146,7 @@ function DeduplicationFieldSelectionDialog({
           setSelectedValues={setSelectedValues}
         />
       )}
-    </>
+    </StyledDeduplicationFieldSelectionDialog>
   );
 }
 
@@ -161,6 +160,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchGlobalSchema,
 }, dispatch);
 
+export { StyledDeduplicationFieldSelectionDialog };
 export default injectIntl(
-  withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DeduplicationFieldSelectionDialog))),
+  connect(mapStateToProps, mapDispatchToProps)(DeduplicationFieldSelectionDialog),
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Tab } from '@material-ui/core';
+import { Tab } from '@mui/material';
 import { PublishedComponent, useTranslations } from '@openimis/fe-core';
 import {
   MODULE_NAME,

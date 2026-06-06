@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
-import { Divider, Grid, Typography } from '@material-ui/core';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { Divider, Grid, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import {
   FormattedMessage,
@@ -11,29 +11,36 @@ import {
   PublishedComponent,
   ValidatedTextInput,
   withModulesManager,
+  GRID_RESPONSIVE_STANDARD,
 } from '@openimis/fe-core';
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 import { codeSetValid, codeValidationCheck, codeValidationClear } from '../actions';
 
-const styles = (theme) => ({
-  tableTitle: theme.table.title,
-  item: theme.paper.item,
-  fullHeight: {
+const StyledPaymentCycleHeadPanel = styled('div')(({ theme }) => ({
+  '& .tableTitle': theme.table?.title ?? {},
+  '& .form': {
+    padding: theme.spacing(1),
+  },
+  '& .item': {
+    padding: theme.spacing(1),
+    ...(theme.paper?.item ?? {}),
+  },
+  '& .fullHeight': {
     height: '100%',
   },
-});
+}));
 
-const renderHeadPanelTitle = (classes) => (
-  <Grid container className={classes.tableTitle}>
-    <Grid item>
+const renderHeadPanelTitle = () => (
+  <Grid container className="tableTitle">
+    <Grid>
       <Grid
         container
         align="center"
         justify="center"
         direction="column"
-        className={classes.fullHeight}
+        className="fullHeight"
       >
-        <Grid item>
+        <Grid>
           <Typography>
             <FormattedMessage module="paymentCycle" id="paymentCycle.PaymentCycleHeadPanel.subtitle" />
           </Typography>
@@ -52,7 +59,6 @@ class PaymentCycleHeadPanel extends FormPanel {
   render() {
     const {
       edited,
-      classes,
       readOnly,
       isCodeValid,
       isCodeValidating,
@@ -61,11 +67,11 @@ class PaymentCycleHeadPanel extends FormPanel {
     } = this.props;
     const paymentCycle = { ...edited };
     return (
-      <>
-        {renderHeadPanelTitle(classes)}
+      <StyledPaymentCycleHeadPanel>
+        {renderHeadPanelTitle()}
         <Divider />
-        <Grid container className={classes.item}>
-          <Grid item xs={3} className={classes.item}>
+        <Grid container className="form">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <ValidatedTextInput
               module="paymentCycle"
               label="PaymentCycleHeadPanel.label.code"
@@ -84,7 +90,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               setValidAction={codeSetValid}
             />
           </Grid>
-          <Grid item xs={3} className={classes.item}>
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.startDate}
@@ -95,7 +101,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('startDate', v)}
             />
           </Grid>
-          <Grid item xs={3} className={classes.item}>
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               value={paymentCycle?.endDate}
@@ -106,7 +112,7 @@ class PaymentCycleHeadPanel extends FormPanel {
               onChange={(v) => this.updateAttribute('endDate', v)}
             />
           </Grid>
-          <Grid item xs={3} className={classes.item}>
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PaymentCycleStatusPicker
               value={paymentCycle?.status}
               required
@@ -117,7 +123,7 @@ class PaymentCycleHeadPanel extends FormPanel {
             />
           </Grid>
         </Grid>
-      </>
+      </StyledPaymentCycleHeadPanel>
     );
   }
 }
@@ -130,6 +136,7 @@ const mapStateToProps = (state) => ({
   code: state.paymentCycle?.paymentCycle?.code,
 });
 
+export { StyledPaymentCycleHeadPanel };
 export default withModulesManager(
-  connect(mapStateToProps)(injectIntl(withTheme(withStyles(styles)(PaymentCycleHeadPanel)))),
+  connect(mapStateToProps)(injectIntl(PaymentCycleHeadPanel)),
 );

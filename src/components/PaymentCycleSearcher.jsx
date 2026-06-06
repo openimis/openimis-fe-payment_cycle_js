@@ -2,11 +2,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 
-import { IconButton, Tooltip } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import { IconButton, Tooltip } from '@mui/material';
 
 import {
-  Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
+  GetIconComponent, Searcher, useHistory, useModulesManager, useTranslations, PublishedComponent,
 } from '@openimis/fe-core';
 import { fetchPaymentCycles } from '../actions';
 import {
@@ -17,6 +16,7 @@ import {
 } from '../constants';
 import PaymentCycleFilter from './PaymentCycleFilter';
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
+const VisibilityIcon = GetIconComponent("Visibility");
 
 function PaymentCycleSearcher({
   fetchingPaymentCycles,
@@ -129,4 +129,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   dispatch,
 );
 
+export { PaymentCycleSearcher };
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentCycleSearcher);
