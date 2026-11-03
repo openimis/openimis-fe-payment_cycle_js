@@ -48,13 +48,13 @@ const DEFAULT_CONFIG = {
   'paymentCycle.TabPanel.label': [PaymentCycleBenefitsTabLabel, PaymentCycleTaskTabLabel],
   'paymentCycle.TabPanel.panel': [PaymentCycleBenefitsTabPanel, PaymentCycleTaskTabPanel],
   'tasksManagement.tasks': [{
-    text: "paymentCycle.paymentCycle.tasks.update.title",
+    text: <FormattedMessage module="paymentCycle" id="tasks.update.title" />,
     tableHeaders: PaymentCycleTaskTableHeaders,
     itemFormatters: PaymentCycleTaskItemFormatters,
     taskSource: ['PaymentCycleService'],
   },
   {
-    text: "paymentCycle.tasks.deduplication.title",
+    text: <FormattedMessage module="paymentCycle" id="tasks.deduplication.title" />,
     tableHeaders: DeduplicationPaymentResolutionTaskTableHeaders,
     itemFormatters: DeduplicationPaymentResolutionItemFormatters,
     taskSource: ['CreateDeduplicationPaymentReviewTasksService'],
