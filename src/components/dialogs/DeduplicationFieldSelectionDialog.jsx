@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { injectIntl } from 'react-intl';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {
-  formatMessage,
+  formatMessage, injectIntl,
 } from '@openimis/fe-core';
 import { styled } from '@mui/material/styles';
 import { connect } from 'react-redux';
@@ -74,11 +73,13 @@ function DeduplicationFieldSelectionDialog({
       <Dialog
         open={isOpen}
         onClose={handleClose}
-        PaperProps={{
-          style: {
-            width: 900,
-            maxWidth: 900,
-          },
+        slotProps={{
+          paper: {
+            style: {
+              width: 900,
+              maxWidth: 900,
+            },
+          }
         }}
       >
         <DialogTitle

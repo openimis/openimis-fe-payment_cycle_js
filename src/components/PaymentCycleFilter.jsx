@@ -1,6 +1,6 @@
 import React from 'react';
-import { injectIntl } from 'react-intl';
-import { PublishedComponent, TextInput, GRID_RESPONSIVE_STANDARD } from '@openimis/fe-core';
+
+import { PublishedComponent, TextInput, GRID_RESPONSIVE_STANDARD, injectIntl } from '@openimis/fe-core';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import _debounce from 'lodash/debounce';
