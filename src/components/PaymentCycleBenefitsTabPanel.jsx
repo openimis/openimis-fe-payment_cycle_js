@@ -29,7 +29,7 @@ function PaymentCycleBenefitsTabPanel({ value, paymentCycleUuid }) {
   const rights = useSelector((store) => store?.core?.user?.i_user?.rights ?? []);
   return (
     <PublishedComponent
-      pubRef="policyHolder.TabPanel"
+      pubRef="core.TabPanel"
       module="paymentCycle"
       index={PAYMENT_CYCLE_BENEFITS_TAB_VALUE}
       value={value}
