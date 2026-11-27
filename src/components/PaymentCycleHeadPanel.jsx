@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
 
 import { Divider, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -12,6 +11,7 @@ import {
   ValidatedTextInput,
   withModulesManager,
   GRID_RESPONSIVE_STANDARD,
+  injectIntl,
 } from '@openimis/fe-core';
 import PaymentCycleStatusPicker from '../pickers/PaymentCycleStatusPicker';
 import { codeSetValid, codeValidationCheck, codeValidationClear } from '../actions';

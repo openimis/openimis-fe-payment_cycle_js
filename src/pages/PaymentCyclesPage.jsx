@@ -2,9 +2,8 @@ import React from 'react';
 import { useSelector, connect } from 'react-redux';
 import {
   Helmet, GetIconComponent,
-  useTranslations, useModulesManager, useHistory, withHistory, withTooltip, withModulesManager
+  useTranslations, useModulesManager, useHistory, withHistory, withTooltip, withModulesManager, injectIntl
 } from '@openimis/fe-core';
-import { injectIntl } from "react-intl"
 import { styled } from '@mui/material/styles';
 import { Fab } from '@mui/material';
 const AddIcon = GetIconComponent("Add");
@@ -15,7 +14,7 @@ import {
 import PaymentCycleSearcher from '../components/PaymentCycleSearcher';
 
 const StyledPaymentCyclesPage = styled('div')(({ theme }) => ({
-  ...theme.page ?? {},
+  ...(theme.page ?? {}),
   '& .fab': theme.fab ?? {},
 }));
 
